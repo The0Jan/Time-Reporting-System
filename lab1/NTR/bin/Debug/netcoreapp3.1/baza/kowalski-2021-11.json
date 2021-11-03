@@ -11,16 +11,16 @@
     {
       "date": "2021-11-05",
       "code": "ARGUS-123",
-      "subcode": "",
-      "time": 60,
-      "description": "refactoring"
+      "subcode": "This works",
+      "time": 65,
+      "description": "RARARASPUTIN"
     },
     {
       "date": "2021-11-05",
       "code": "OTHER",
-      "subcode": "",
-      "time": 120,
-      "description": "enjoying life"
+      "subcode": "Bababui",
+      "time": 100,
+      "description": "enjoying maybe life"
     },
     {
       "date": "2021-11-05",

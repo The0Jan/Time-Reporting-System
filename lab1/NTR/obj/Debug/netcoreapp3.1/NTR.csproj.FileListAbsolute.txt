@@ -81,3 +81,5 @@
 /home/swo/Projekt_NTR/lab1/NTR/obj/Debug/netcoreapp3.1/NTR.genruntimeconfig.cache
 /home/swo/Projekt_NTR/lab1/NTR/obj/Debug/netcoreapp3.1/NTR.csproj.CopyComplete
 /home/swo/Projekt_NTR/lab1/NTR/obj/Debug/netcoreapp3.1/Razor/Views/Home/Edit_info.cshtml.g.cs
+/home/swo/Projekt_NTR/lab1/NTR/bin/Debug/netcoreapp3.1/baza/activity.json
+/home/swo/Projekt_NTR/lab1/NTR/obj/Debug/netcoreapp3.1/Razor/Views/Home/Create.cshtml.g.cs

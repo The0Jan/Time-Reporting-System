@@ -18,9 +18,9 @@
     {
       "date": "2021-11-05",
       "code": "OTHER",
-      "subcode": "",
-      "time": 120,
-      "description": "enjoying life"
+      "subcode": "Bababui",
+      "time": 100,
+      "description": "enjoying maybe life"
     },
     {
       "date": "2021-11-05",
@@ -56,6 +56,13 @@
       "subcode": "other",
       "time": 45,
       "description": "project meeting"
+    },
+    {
+      "date": "2021-11-03",
+      "code": "ARGUS-123",
+      "subcode": null,
+      "time": 100,
+      "description": "Okey"
     }
   ],
   "acceptedEntries": null
