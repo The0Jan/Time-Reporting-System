@@ -4,16 +4,16 @@
     {
       "date": "2021-11-02",
       "code": "OTHER",
-      "subcode": "database",
-      "time": 100,
-      "description": "data export"
+      "subcode": null,
+      "time": 0,
+      "description": null
     },
     {
       "date": "2021-11-05",
       "code": "ARGUS-123",
-      "subcode": "",
-      "time": 60,
-      "description": "refactoring"
+      "subcode": "This works",
+      "time": 65,
+      "description": "RARARASPUTIN"
     },
     {
       "date": "2021-11-05",

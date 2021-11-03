@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/swo/NTR/NTR.csproj",
+      "projectUniqueName": "/home/swo/Projekt_NTR/lab1/NTR/NTR.csproj",
       "projectName": "NTR",
-      "projectPath": "/home/swo/NTR/NTR.csproj",
+      "projectPath": "/home/swo/Projekt_NTR/lab1/NTR/NTR.csproj",
       "packagesPath": "/home/swo/.nuget/packages/",
-      "outputPath": "/home/swo/NTR/obj/",
+      "outputPath": "/home/swo/Projekt_NTR/lab1/NTR/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/swo/.nuget/NuGet/NuGet.Config"
