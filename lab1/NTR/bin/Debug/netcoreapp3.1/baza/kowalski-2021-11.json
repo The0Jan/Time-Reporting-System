@@ -1,0 +1,62 @@
+{
+  "frozen": true,
+  "entries": [
+    {
+      "date": "2021-11-02",
+      "code": "OTHER",
+      "subcode": "database",
+      "time": 100,
+      "description": "data export"
+    },
+    {
+      "date": "2021-11-05",
+      "code": "ARGUS-123",
+      "subcode": "",
+      "time": 60,
+      "description": "refactoring"
+    },
+    {
+      "date": "2021-11-05",
+      "code": "OTHER",
+      "subcode": "",
+      "time": 120,
+      "description": "enjoying life"
+    },
+    {
+      "date": "2021-11-05",
+      "code": "ARGUS-123",
+      "subcode": "",
+      "time": 15,
+      "description": "yelling at a coworker"
+    },
+    {
+      "date": "2021-11-07",
+      "code": "OTHER",
+      "subcode": "",
+      "time": 120,
+      "description": "picie kawy"
+    },
+    {
+      "date": "2021-11-08",
+      "code": "ARGUS-123",
+      "subcode": "",
+      "time": 45,
+      "description": "kompilacja"
+    },
+    {
+      "date": "2021-11-08",
+      "code": "OTHER",
+      "subcode": "",
+      "time": 120,
+      "description": "office arrangement"
+    },
+    {
+      "date": "2021-11-12",
+      "code": "ARGUS-123",
+      "subcode": "other",
+      "time": 45,
+      "description": "project meeting"
+    }
+  ],
+  "acceptedEntries": null
+}
