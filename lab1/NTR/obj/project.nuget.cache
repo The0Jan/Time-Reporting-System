@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AMxjm00IgTRqpF9AZ/bv3phybUShvLI8tkuQhG8VPI01hYAk9DOUWagHZKWGDOXISxMc45tQKk/FStOL73BgWw==",
+  "dgSpecHash": "hnzdIC2kklZdrHSMTD7e1NlTpZV9AaVCzrKV1NAJHoGcE4ETqMHg47rBGcMau2G6fuphWRg8S9HFcPJ59sAl0w==",
   "success": true,
-  "projectFilePath": "/home/swo/NTR/NTR.csproj",
+  "projectFilePath": "/home/swo/Projekt_NTR/lab1/NTR/NTR.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -52,29 +52,43 @@ namespace NTR.Controllers
         [HttpPost]
         public IActionResult Account(string date, int id)
         {
-            DateTime result = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            ActivitiesForDayModel Updated_activities = new ActivitiesForDayModel(Request.Cookies["users"],result);
+            DateTime date_formatted = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            ActivitiesForDayModel Updated_activities = new ActivitiesForDayModel(Request.Cookies["users"],date_formatted);
             Updated_activities.Activities.entries.RemoveAt(id);
-            Entities.Report.save(Updated_activities.Activities,Request.Cookies["users"],result );
+            Entities.Report.save(Updated_activities.Activities,Request.Cookies["users"],date_formatted );
 
-            return View(new ActivitiesForDayModel(Request.Cookies["users"],result));
+            return View(new ActivitiesForDayModel(Request.Cookies["users"],date_formatted));
         }
 
         [HttpGet]
         public IActionResult Details(string date, int id)
         {
-            DateTime result = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            DateTime date_formatted = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             ViewBag.id = id;
-            return View(new ActivitiesForDayModel(Request.Cookies["users"],result));
+            return View(new ActivitiesForDayModel(Request.Cookies["users"],date_formatted));
         }
 
 
         [HttpGet]
-        public IActionResult Edit(string date, int id)
+        public IActionResult Edit_info(string date, int id)
         {
-            DateTime result = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            ViewBag.id = id;
-            return View(new ActivitiesForDayModel(Request.Cookies["users"],result));
+            DateTime date_formatted = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            EditEntryModel edit = new EditEntryModel(new ActivitiesForDayModel(Request.Cookies["users"],date_formatted).Activities.entries[id], id);
+            return View(edit);
+        }
+
+        [HttpPost]
+        public IActionResult Edit_info(EditEntryModel entry)
+        {
+            DateTime date_formatted = DateTime.ParseExact(entry.date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            ActivitiesForDayModel activity = new ActivitiesForDayModel(Request.Cookies["users"],date_formatted);
+            activity.Activities.entries[entry.id].subcode = entry.subcode;
+            activity.Activities.entries[entry.id].description = entry.description;
+            activity.Activities.entries[entry.id].time = entry.time;
+
+            Entities.Report.save(activity.Activities,Request.Cookies["users"],date_formatted );
+
+            return RedirectToAction("Account", "Home", new {@date = date_formatted});
         }
         public IActionResult LogOut()
         {

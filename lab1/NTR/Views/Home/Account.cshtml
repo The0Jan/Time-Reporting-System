@@ -72,8 +72,11 @@
                     <input type = "hidden" name = "date" value = '@Model.SelectedDate' />
                     <button type="submit">Delete</button>
                 </form>
-                <a asp-action="Edit" asp-route-id="@item.date">Edit</a> |
-
+                <form asp-action = "Edit_info" method="get">
+                    <input type = "hidden" name = "id" value = '@id'/>
+                    <input type = "hidden" name = "date" value = '@Model.SelectedDate' />
+                    <button type="submit">Edit</button>
+                </form>
             </td>
         </tr>
         }
