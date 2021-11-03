@@ -1,0 +1,55 @@
+<h1>Edit</h1>
+<div>
+    <h3>Index</h3>
+    <form asp-route="Edit_info" method="post">
+
+        <h5>Date</h5>
+        <p>
+            @ViewBag.date
+            <input name = "entry.date" value="@ViewBag.date" type="hidden">
+        </p>
+
+        @if (@Model.project_list.activities != null)
+        {
+        <h5>Code</h5>
+        <p> 
+            <select name="entry.code" >
+            @foreach (NTR.Entities.Activity item in Model.project_list.activities)
+            {
+                <option value="@item.code"> @item.code</option>
+            }
+            </select>
+        </p>
+
+        <h5>Subcode</h5>
+        <p> 
+            <select name="entry.subcode" >
+            @foreach (NTR.Entities.Activity item in Model.project_list.activities)
+            {
+                <optgroup label="@item.name"> 
+                
+                <option value=""></option>
+
+                @foreach (NTR.Entities.Subactivity subitem in item.subactivities)
+                {
+                    <option value="@subitem.code"> @subitem.code</option>
+                }
+                </optgroup>
+            }
+            </select>
+        </p>
+        }
+        <h5>Time</h5>
+        <p>
+            <input name = "entry.time" type="number">
+        </p>
+        <h5>Description</h5>
+        <p>
+            <input name = "entry.description">
+        </p>
+        <button asp-route="Create">Create Activity</button>
+    </form>
+</div>
+<div>
+    <a asp-action="Account">Back to List</a>
+</div>

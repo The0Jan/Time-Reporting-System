@@ -1,0 +1,28 @@
+{
+    "activities": [
+    {
+    "code": "ARGUS-123",
+    "manager": "nowak",
+    "name": "Argus",
+    "budget": 125,
+    "active": true,
+    "subactivities":[{"code":"database"},{"code":"other"} ]
+    },
+    {
+    "code": "OTHER",
+    "manager": "smith",
+    "name": "Other",
+    "budget": -1,
+    "active": true,
+    "subactivities":[]
+    },
+    {
+    "code": "AUSTIN",
+    "manager": "Znachor",
+    "name": "Austin",
+    "budget": 100,
+    "active": false,
+    "subactivities":[{"code":"refactoring"},{"code":"rerefactoring"}, {"code":"fighting HR"},{"code":"getting investors"}]
+    }
+    ]
+    }

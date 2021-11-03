@@ -24,7 +24,7 @@ namespace NTR.Entities
     {
         public bool frozen {get; set;}
         public List<Entry> entries {get; set;}
-        public List<AcceptedEntry> acceptedEntries {get; set;}
+        public List<AcceptedEntry> accepted {get; set;}
 
         public static Report load(String user, DateTime date)
         {

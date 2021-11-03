@@ -90,6 +90,37 @@ namespace NTR.Controllers
 
             return RedirectToAction("Account", "Home", new {@date = date_formatted});
         }
+
+
+        [HttpGet]
+        public IActionResult Create(string date)
+        {
+            return View(new ActivityModel());
+        }
+
+        [HttpPost]
+        public IActionResult Create(EditEntryModel entry)
+        {
+            DateTime date_formatted = DateTime.ParseExact(entry.date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            ActivitiesForDayModel activity = new ActivitiesForDayModel(Request.Cookies["users"],date_formatted);
+            NTR.Entities.Entry new_entry = new NTR.Entities.Entry();
+            new_entry.date = entry.date;
+            new_entry.code = entry.code;
+            new_entry.subcode = entry.subcode;
+            new_entry.time = entry.time;
+            new_entry.description = entry.description;
+
+            activity.Activities.entries.Add(new_entry);
+            Entities.Report.save(activity.Activities,Request.Cookies["users"],date_formatted );
+
+            return RedirectToAction("Account", "Home", new {@date = date_formatted});
+        }
+
+        [HttpGet]
+        public IActionResult MonthlyCheck(string date)
+        {
+            return View(new MonthlyCheckModel(Request.Cookies["users"],date));
+        }
         public IActionResult LogOut()
         {
             if (Request.Cookies["users"] != null)

@@ -14407,6 +14407,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/swo/Projekt_NTR/lab1/NTR/Views/Home/Create.cshtml",
+      "TargetPath": "Views\\Home\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/swo/Projekt_NTR/lab1/NTR/Views/Home/User_Creation.cshtml",
       "TargetPath": "Views\\Home\\User_Creation.cshtml",
       "FileKind": "mvc"
@@ -14424,6 +14429,11 @@
     {
       "FilePath": "/home/swo/Projekt_NTR/lab1/NTR/Views/_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/swo/Projekt_NTR/lab1/NTR/Views/Home/MonthlyCheck.cshtml",
+      "TargetPath": "Views\\Home\\MonthlyCheck.cshtml",
       "FileKind": "mvc"
     },
     {
