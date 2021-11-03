@@ -1,0 +1,22 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html><head><meta name="viewport" content="width=device-width" />
+    <title>Index</title></head>
+<body>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post)) 
+    {
+        @Html.AntiForgeryToken() @Html.ValidationSummary(true)
+        <fieldset>
+            <legend>System raportowania Czasu</legend>
+                @Html.DropDownList("Users")
+            <p> 
+                <input type="submit" value="Zaloguj" /> 
+            </p>
+
+        </fieldset>
+    }
+    <div> @Html.ActionLink("Create user", "User_Creation") </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<h1>Details</h1>
+
+<div>
+    <h4>Details</h4>
+        <table class="table">
+        <thead>
+            <tc>
+                <th>
+                    Index
+                </th>
+            </tc>
+            <tc>
+                <th>
+                    Date
+                </th>
+            </tc>
+            <tc>
+                <th>
+                    Code
+                </th>
+            </tc>
+            <tc>
+                <th>
+                    Subcode
+                </th>
+            </tc>
+            <tc>
+                <th>
+                    Time
+                </th>
+            </tc>
+            <tc>
+                <th>
+                    Description
+                </th>
+            </tc>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @ViewBag.id
+                </td>
+                <td>
+                    @Model.Activities.entries[@ViewBag.id].date
+                </td>
+                <td>
+                    @Model.Activities.entries[@ViewBag.id].code
+                </td>
+                <td>
+                    @Model.Activities.entries[@ViewBag.id].subcode
+                </td>
+                <td>
+                    @Model.Activities.entries[@ViewBag.id].time
+                </td>
+                <td>
+                    @Model.Activities.entries[@ViewBag.id].description
+                </td>
+            </tr>
+    </dl>
+</div>
+<div>
+    <a asp-action="Account">Back to List</a>
+</div>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+ 
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width"/>
+            <title>Greetings</title>
+    </head>
+    <body>
+        <div class="control">
+            <span>Name: </span>
+            <span>@ViewBag.Name</span>
+
+            <br><a href="/Home/LogOut"> Logout</a></
+        </div>
+
+        <div class="text-center">
+            <h1 class="display-6">Activities for @Model.SelectedDate</h1>
+            <form>
+            <p>Change preview date</p>
+            <input type="date" name="date" onchange="this.form.submit()">
+            </form>
+        </div>
+
+        <table class="table">
+        <thead>
+            <tc>
+                <th>
+                    Index
+                </th>
+            </tc>
+            <tc>
+                <th>
+                    Code
+                </th>
+            </tc>
+            <tc>
+                <th>
+                    Time
+                </th>
+            </tc>
+        </thead>
+        <tbody>
+    @if (Model.Activities.entries != null)
+    {
+        int id = 0;
+        int time = 0;
+
+        foreach ( NTR.Entities.Entry item in Model.Activities.entries) 
+        {
+        if (item.date == Model.SelectedDate)
+        {
+            time = time +  Convert.ToInt32(item.time);
+        <tr>
+            <td>
+                @id
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.time)
+            </td>
+            <td>
+                <form asp-action = "Details" method="get">
+                    <input type = "hidden" name = "id" value = '@id'/>
+                    <input type = "hidden" name = "date" value = '@Model.SelectedDate' />
+                    <button type="submit">Details</button>
+                </form>
+
+                <form asp-action = "Account" method="post">
+                    <input type = "hidden" name = "id" value = '@id'/>
+                    <input type = "hidden" name = "date" value = '@Model.SelectedDate' />
+                    <button type="submit">Delete</button>
+                </form>
+                <a asp-action="Edit" asp-route-id="@item.date">Edit</a> |
+
+            </td>
+        </tr>
+        }
+        id += 1;
+        }
+        <td>
+            Reported time: @time
+        </td>
+    }
+    </tbody>
+    </table>
+    </body>
+</html>
