@@ -92,5 +92,9 @@
             <input type = "hidden" name = "date" value = '@Model.SelectedDate' />
             <button type="submit">Create New</button>
         </form>
+        <form asp-action = "MonthlyCheck" method="get">
+            <input type = "hidden" name = "date" value = '@Model.SelectedDate' />
+            <button type="submit">Check Monthly Times</button>
+        </form>
     </body>
 </html>

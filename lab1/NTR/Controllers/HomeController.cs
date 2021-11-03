@@ -95,7 +95,6 @@ namespace NTR.Controllers
         [HttpGet]
         public IActionResult Create(string date)
         {
-            ViewBag.date = date;
             return View(new ActivityModel());
         }
 
@@ -115,6 +114,12 @@ namespace NTR.Controllers
             Entities.Report.save(activity.Activities,Request.Cookies["users"],date_formatted );
 
             return RedirectToAction("Account", "Home", new {@date = date_formatted});
+        }
+
+        [HttpGet]
+        public IActionResult MonthlyCheck(string date)
+        {
+            return View(new MonthlyCheckModel(Request.Cookies["users"],date));
         }
         public IActionResult LogOut()
         {

@@ -14432,6 +14432,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/swo/Projekt_NTR/lab1/NTR/Views/Home/MonthlyCheck.cshtml",
+      "TargetPath": "Views\\Home\\MonthlyCheck.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/swo/Projekt_NTR/lab1/NTR/Views/Home/Edit_info.cshtml",
       "TargetPath": "Views\\Home\\Edit_info.cshtml",
       "FileKind": "mvc"

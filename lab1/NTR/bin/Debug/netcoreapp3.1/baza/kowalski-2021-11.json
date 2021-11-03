@@ -56,7 +56,14 @@
       "subcode": "other",
       "time": 45,
       "description": "project meeting"
+    },
+    {
+      "date": "2021-11-03",
+      "code": "ARGUS-123",
+      "subcode": null,
+      "time": 100,
+      "description": "Okey"
     }
   ],
-  "acceptedEntries": null
+  "accepted": []
 }

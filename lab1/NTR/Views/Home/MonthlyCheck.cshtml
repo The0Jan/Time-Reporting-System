@@ -1,0 +1,68 @@
+<html>
+<head><h1>Monthly Time Spent on Projects</h1></head>
+<body>
+<div>
+    <a asp-action="Account">Back to List</a>
+</div>
+<div>
+    <h4>Reported time</h4>
+        <table class="table">
+        <thead>
+            <tc>
+                <th>
+                    Project Code
+                </th>
+            </tc>
+            <tc>
+                <th>
+                    Time invested
+                </th>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.checks)
+            {
+                <tr>
+                    <td>
+                        @item.code
+                    </td>
+                    <td>
+                        @item.time
+                    </td>
+                </tr>
+            }
+        </tbody>
+</div>
+
+<div>
+    <h5>Accepted reported time</h5>
+        <table class="table">
+        <thead>
+            <tc>
+                <th>
+                    Project Code
+                </th>
+            </tc>
+            <tc>
+                <th>
+                    Time accepted
+                </th>
+        </thead>
+        <tbody>
+        @if(Model.acceptedChecks != null && Model != null )
+        {
+            @foreach (var item in Model.acceptedChecks)
+            {
+                <tr>
+                    <td>
+                        @item.code
+                    </td>
+                    <td>
+                        @item.time
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+</div>
+</body>
+</html>

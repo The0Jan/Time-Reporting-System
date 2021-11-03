@@ -8,6 +8,7 @@ namespace NTR.Models {
 
         public ActivityModel() 
         {
+
             this.project_list = Entities.Project_List.load();
         }
         
