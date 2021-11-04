@@ -66,7 +66,8 @@
                     <input type = "hidden" name = "date" value = '@Model.SelectedDate' />
                     <button type="submit">Details</button>
                 </form>
-
+            @if (Model.Activities.frozen != true)
+            {
                 <form asp-action = "Account" method="post">
                     <input type = "hidden" name = "id" value = '@id'/>
                     <input type = "hidden" name = "date" value = '@Model.SelectedDate' />
@@ -77,6 +78,7 @@
                     <input type = "hidden" name = "date" value = '@Model.SelectedDate' />
                     <button type="submit">Edit</button>
                 </form>
+            }
             </td>
         </tr>
         }
@@ -96,5 +98,12 @@
             <input type = "hidden" name = "date" value = '@Model.SelectedDate' />
             <button type="submit">Check Monthly Times</button>
         </form>
+        @if (Model.Activities.frozen != true)
+        {
+        <form asp-action = "FreezeMonth" method="post">
+            <input type = "hidden" name = "date" value = '@Model.SelectedDate' />
+            <button type="submit">Submit Current Month</button>
+        </form>
+        }
     </body>
 </html>

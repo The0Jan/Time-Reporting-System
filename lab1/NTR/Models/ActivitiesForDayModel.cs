@@ -8,13 +8,13 @@ namespace NTR.Models {
 
         public ActivitiesForDayModel(string user_name) {
             this.SelectedDate = DateTime.Today.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-            this.Activities = Entities.Report.load(user_name, DateTime.Today);
+            this.Activities = Entities.Report.json_load(user_name, DateTime.Today);
 
         }
 
         public ActivitiesForDayModel(string user_name, DateTime date) {
             this.SelectedDate = date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-            this.Activities = Entities.Report.load(user_name, date);
+            this.Activities = Entities.Report.json_load(user_name, date);
 
         }
 

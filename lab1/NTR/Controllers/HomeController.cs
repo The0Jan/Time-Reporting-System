@@ -55,7 +55,7 @@ namespace NTR.Controllers
             DateTime date_formatted = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             ActivitiesForDayModel Updated_activities = new ActivitiesForDayModel(Request.Cookies["users"],date_formatted);
             Updated_activities.Activities.entries.RemoveAt(id);
-            Entities.Report.save(Updated_activities.Activities,Request.Cookies["users"],date_formatted );
+            Entities.Report.json_save(Updated_activities.Activities,Request.Cookies["users"],date_formatted );
 
             return View(new ActivitiesForDayModel(Request.Cookies["users"],date_formatted));
         }
@@ -86,7 +86,7 @@ namespace NTR.Controllers
             activity.Activities.entries[entry.id].description = entry.description;
             activity.Activities.entries[entry.id].time = entry.time;
 
-            Entities.Report.save(activity.Activities,Request.Cookies["users"],date_formatted );
+            Entities.Report.json_save(activity.Activities,Request.Cookies["users"],date_formatted );
 
             return RedirectToAction("Account", "Home", new {@date = date_formatted});
         }
@@ -95,6 +95,7 @@ namespace NTR.Controllers
         [HttpGet]
         public IActionResult Create(string date)
         {
+            ViewBag.date = date;
             return View(new ActivityModel());
         }
 
@@ -111,7 +112,7 @@ namespace NTR.Controllers
             new_entry.description = entry.description;
 
             activity.Activities.entries.Add(new_entry);
-            Entities.Report.save(activity.Activities,Request.Cookies["users"],date_formatted );
+            Entities.Report.json_save(activity.Activities,Request.Cookies["users"],date_formatted );
 
             return RedirectToAction("Account", "Home", new {@date = date_formatted});
         }
@@ -119,8 +120,23 @@ namespace NTR.Controllers
         [HttpGet]
         public IActionResult MonthlyCheck(string date)
         {
+            ViewBag.date = date;
             return View(new MonthlyCheckModel(Request.Cookies["users"],date));
         }
+
+        [HttpPost]
+        public IActionResult FreezeMonth(string date)
+        {
+            DateTime date_formatted = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            ActivitiesForDayModel activity = new ActivitiesForDayModel(Request.Cookies["users"],date_formatted); 
+            activity.Activities.frozen = true;
+
+            Entities.Report.json_save(activity.Activities,Request.Cookies["users"],date_formatted );
+
+            return RedirectToAction("Account", "Home", new {@date = date_formatted});
+
+        }
+
         public IActionResult LogOut()
         {
             if (Request.Cookies["users"] != null)
