@@ -14,6 +14,8 @@ namespace NTR.Models
             Entities.Project_List project_List = Entities.Project_List.load();
             this.my_projects = new List<Entities.Activity>();
             this.SelectedProject = "Not Yet Selected";
+            this.SelectedUserActivities = new Entities.Report();
+            this.SelectedUserActivities.frozen =  false;
 
             for (int i = 0; i < project_List.activities.Count ; i++)
             {

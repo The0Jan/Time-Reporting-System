@@ -55,31 +55,34 @@
         <div>
             Reported time: @Model.SelectedUserReportedTime
             <br>
-            Accepted time:
-            @if(@Model.Active != true)
+            @if (Model.SelectedUserActivities.frozen == true)
             {
-                @Model.SelectedUserAcceptedTime            }
-            else
-            {
-            <form asp-route="ProjectManagment" method="post">
+                <h6>Accepted time:</h6>
+                if(Model.Active != true)
+                {
+                    @Model.SelectedUserAcceptedTime            }
+                else
+                {
+                <form asp-route="ProjectManagment" method="post">
 
-                <input  name = "accepted_time" value="@Model.SelectedUserAcceptedTime" type="number">
+                    <input  name = "accepted_time" value="@Model.SelectedUserAcceptedTime" type="number">
 
-                <input name = "member" type="hidden" value="@Model.SelectedUser">
-                <input name = "month" type="hidden" value="@Model.SelectedMonth">
-                <input name = "project" type="hidden" value="@Model.SelectedProject">
-                <input name = "previous_accepted_time" type="hidden" value="@Model.SelectedUserAcceptedTime">
-                <input name = "budget" type="hidden" value="@Model.Budget">
+                    <input name = "member" type="hidden" value="@Model.SelectedUser">
+                    <input name = "month" type="hidden" value="@Model.SelectedMonth">
+                    <input name = "project" type="hidden" value="@Model.SelectedProject">
+                    <input name = "previous_accepted_time" type="hidden" value="@Model.SelectedUserAcceptedTime">
+                    <input name = "budget" type="hidden" value="@Model.Budget">
 
-                <button type="submit">Change accepted time</button>
-            </form>
+                    <button type="submit">Change accepted time</button>
+                </form>
 
-            <form asp-action = "CloseProject" method="post">
-                <input name = "member" type="hidden" value="@Model.SelectedUser">
-                <input name = "date" type="hidden" value="@Model.SelectedMonth">
-                <input name = "project" type="hidden" value="@Model.SelectedProject">
-                <button type="submit">Close Project</button>
-            </form>
+                <form asp-action = "CloseProject" method="post">
+                    <input name = "member" type="hidden" value="@Model.SelectedUser">
+                    <input name = "date" type="hidden" value="@Model.SelectedMonth">
+                    <input name = "project" type="hidden" value="@Model.SelectedProject">
+                    <button type="submit">Close Project</button>
+                </form>
+                }
             }
         </div>
         Budget: @Model.Budget
