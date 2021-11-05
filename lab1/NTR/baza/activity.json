@@ -59,6 +59,30 @@
       "budget": 888,
       "active": true,
       "subactivities": []
+    },
+    {
+      "code": "YES",
+      "manager": "kowalski",
+      "name": "yess",
+      "budget": 100,
+      "active": true,
+      "subactivities": [
+        {
+          "code": "okey"
+        }
+      ]
+    },
+    {
+      "code": "YES",
+      "manager": "kowalski",
+      "name": "yess",
+      "budget": 1000,
+      "active": true,
+      "subactivities": [
+        {
+          "code": "maybe"
+        }
+      ]
     }
   ]
 }

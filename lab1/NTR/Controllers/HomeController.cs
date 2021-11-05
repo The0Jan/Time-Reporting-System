@@ -74,6 +74,17 @@ namespace NTR.Controllers
         {
             DateTime date_formatted = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             EditEntryModel edit = new EditEntryModel(new ActivitiesForDayModel(Request.Cookies["users"],date_formatted).Activities.entries[id], id);
+
+            Entities.Project_List project_List =  Entities.Project_List.load();
+
+            foreach(Entities.Activity active in project_List.activities)
+            {
+                if(Equals(active.code, edit.code))
+                {
+                    edit.sub_to_choose =  active.subactivities;
+                    break;
+                }
+            }
             return View(edit);
         }
 
@@ -85,6 +96,7 @@ namespace NTR.Controllers
             activity.Activities.entries[entry.id].subcode = entry.subcode;
             activity.Activities.entries[entry.id].description = entry.description;
             activity.Activities.entries[entry.id].time = entry.time;
+            activity.Activities.entries[entry.id].subcode = entry.subcode;
 
             Entities.Report.json_save(activity.Activities,Request.Cookies["users"],date_formatted );
 
@@ -127,10 +139,26 @@ namespace NTR.Controllers
         public IActionResult CreateProject()
         {
             ViewBag.name = Request.Cookies["users"];
-            return View(new ActivityModel());
+            return View();
         }
 
+        [HttpPost]
+        public IActionResult CreateProject(Entities.Activity entry, string subactivity)
+        {
+ 
+            Entities.Subactivity new_subactivity = new Entities.Subactivity();
+            new_subactivity.code = subactivity;
+            entry.subactivities = new List<Entities.Subactivity>();
 
+            entry.subactivities.Add(new_subactivity);
+
+            ActivityModel projects = new ActivityModel();
+            entry.active = true;
+            projects.project_list.activities.Add(entry);
+            Entities.Project_List.save(projects.project_list);
+
+            return RedirectToAction("Account", "Home");
+        }
 
 
 
@@ -206,16 +234,6 @@ namespace NTR.Controllers
             }
             Entities.Project_List.save(updated_list);
             return RedirectToAction("ProjectManagment", "Home", new {@date = month, @project = project, @member = member});
-        }
-
-        [HttpPost]
-        public IActionResult CreateProject(Entities.Activity project)
-        {
-            ActivityModel updated_projects = new ActivityModel();
-            project.active = true;
-            updated_projects.project_list.activities.Add(project);
-            Entities.Project_List.save(updated_projects.project_list);
-            return RedirectToAction("Account", "Home");
         }
 
         [HttpPost]

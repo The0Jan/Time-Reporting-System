@@ -10,25 +10,25 @@
         <h5>Manager Name:</h5>
         <p>
             @ViewBag.name
-            <input name = "project.manager" value="@ViewBag.name" type="hidden">
+            <input name = "entry.manager" value="@ViewBag.name" type="hidden">
         </p>
         <h5>Code:</h5>
         <p> 
-            <input name = "project.code" type="text">
+            <input name = "entry.code" type="text">
         </p>
         <h5>Project Name:</h5>
         <p> 
-            <input name = "project.name" type="text">
+            <input name = "entry.name" type="text">
         </p>
         <h5>Budget:</h5>
         <p>
-            <input name = "project.budget" type="number">
+            <input name = "entry.budget" type="number">
         </p>
         <h5>Subactivities</h5>
         <p>
-            <input name = "project.subactivities">
+            <input name = "subactivity">
         </p>
-        <button asp-route="CreateProject">Create Activity</button>
+        <button asp-route="CreateProject">Create Project</button>
     </form>
 </div>
 <div>
