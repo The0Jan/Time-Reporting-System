@@ -30,7 +30,11 @@ namespace NTR.Entities
         {
             var directory  = $"baza/{user}-{date.Year}-{date.Month}.json";
             if (!System.IO.File.Exists(directory)) {
-                return new Report();
+                Report fresh_report = new Report();
+                fresh_report.frozen = false;
+                fresh_report.entries = new List<Entry>();
+                fresh_report.accepted = new List<AcceptedEntry>();
+                return fresh_report;
             }
             var report_json = System.IO.File.ReadAllText(directory);
             return System.Text.Json.JsonSerializer.Deserialize<Report>(report_json);

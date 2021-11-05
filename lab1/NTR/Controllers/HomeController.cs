@@ -123,6 +123,100 @@ namespace NTR.Controllers
             ViewBag.date = date;
             return View(new MonthlyCheckModel(Request.Cookies["users"],date));
         }
+        [HttpGet]
+        public IActionResult CreateProject()
+        {
+            ViewBag.name = Request.Cookies["users"];
+            return View(new ActivityModel());
+        }
+
+
+
+
+
+        [HttpGet]
+        public IActionResult ProjectManagment(DateTime? date, string project, string member)
+        {
+
+            ViewBag.name = Request.Cookies["users"];
+            
+            if (!date.HasValue || project == null)
+            {
+                ViewBag.date = "Not Yet selected";
+                return View(new ProjectManagmentModel(Request.Cookies["users"]));
+            }
+            else
+            {
+                ViewBag.show_date = date.Value.ToString("yyyy-MM", CultureInfo.InvariantCulture);
+                ViewBag.return_date = date.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+                return View(new ProjectManagmentModel(Request.Cookies["users"], project, date.Value, member));   
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult CloseProject(DateTime date, string project, string member)
+        {
+            Entities.Project_List updated_list =  Entities.Project_List.load();
+            for(int i=0; i<updated_list.activities.Count; i++)
+            {
+                if(Equals(updated_list.activities[i].code, project))
+                {
+                    updated_list.activities[i].active = false;
+                    break;
+                }
+            }
+            Entities.Project_List.save(updated_list);
+
+            return RedirectToAction("ProjectManagment", "Home", new {@date = date, @project = project, @member = member});
+        }
+        
+        [HttpPost]
+        public IActionResult ProjectManagment(int accepted_time, string member, DateTime month, string project, int previous_accepted_time, int budget)
+        {
+            Entities.Report new_report = Entities.Report.json_load(member, month);
+            for(int i=0; i<new_report.accepted.Count; i++)
+            {
+                if(Equals(new_report.accepted[i].code, project))
+                {
+                    new_report.accepted[i].time = accepted_time;
+                    break;
+                }
+            }
+
+            if(0 == new_report.accepted.Count )
+            {
+                Entities.AcceptedEntry new_entry = new Entities.AcceptedEntry();
+                new_entry.time = accepted_time;
+                new_entry.code = project;
+                new_report.accepted = new List<Entities.AcceptedEntry>();
+                new_report.accepted.Add(new_entry);
+            }
+            Entities.Report.json_save(new_report,member, month);
+
+            int correct = accepted_time - previous_accepted_time ;
+            Entities.Project_List updated_list =  Entities.Project_List.load();
+            for(int i=0; i<updated_list.activities.Count; i++)
+            {
+                if(Equals(updated_list.activities[i].code, project))
+                {
+                    updated_list.activities[i].budget = budget - correct;
+                    break;
+                }
+            }
+            Entities.Project_List.save(updated_list);
+            return RedirectToAction("ProjectManagment", "Home", new {@date = month, @project = project, @member = member});
+        }
+
+        [HttpPost]
+        public IActionResult CreateProject(Entities.Activity project)
+        {
+            ActivityModel updated_projects = new ActivityModel();
+            project.active = true;
+            updated_projects.project_list.activities.Add(project);
+            Entities.Project_List.save(updated_projects.project_list);
+            return RedirectToAction("Account", "Home");
+        }
 
         [HttpPost]
         public IActionResult FreezeMonth(string date)

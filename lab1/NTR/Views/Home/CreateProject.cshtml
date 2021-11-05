@@ -1,0 +1,38 @@
+<html>
+<head>
+<h1>Create Project</h1>
+</head>
+<body>
+<div>
+    <h3>Index</h3>
+    <form asp-route="CreateProject" method="post">
+
+        <h5>Manager Name:</h5>
+        <p>
+            @ViewBag.name
+            <input name = "project.manager" value="@ViewBag.name" type="hidden">
+        </p>
+        <h5>Code:</h5>
+        <p> 
+            <input name = "project.code" type="text">
+        </p>
+        <h5>Project Name:</h5>
+        <p> 
+            <input name = "project.name" type="text">
+        </p>
+        <h5>Budget:</h5>
+        <p>
+            <input name = "project.budget" type="number">
+        </p>
+        <h5>Subactivities</h5>
+        <p>
+            <input name = "project.subactivities">
+        </p>
+        <button asp-route="CreateProject">Create Activity</button>
+    </form>
+</div>
+<div>
+    <a asp-action="Account">Back to List</a>
+</div>
+</body>
+</html>

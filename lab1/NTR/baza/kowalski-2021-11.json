@@ -65,5 +65,10 @@
       "description": "Okey"
     }
   ],
-  "accepted": []
+  "accepted": [
+    {
+      "code": "ARGUS-123",
+      "time": 100
+    }
+  ]
 }

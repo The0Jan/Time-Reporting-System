@@ -14422,6 +14422,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/swo/Projekt_NTR/lab1/NTR/Views/Home/ProjectManagment.cshtml",
+      "TargetPath": "Views\\Home\\ProjectManagment.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/swo/Projekt_NTR/lab1/NTR/Views/Home/Details.cshtml",
       "TargetPath": "Views\\Home\\Details.cshtml",
       "FileKind": "mvc"
@@ -14429,11 +14434,6 @@
     {
       "FilePath": "/home/swo/Projekt_NTR/lab1/NTR/Views/_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/home/swo/Projekt_NTR/lab1/NTR/Views/Home/Create_Project.cshtml",
-      "TargetPath": "Views\\Home\\Create_Project.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14459,6 +14459,11 @@
     {
       "FilePath": "/home/swo/Projekt_NTR/lab1/NTR/Views/Shared/_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/swo/Projekt_NTR/lab1/NTR/Views/Home/CreateProject.cshtml",
+      "TargetPath": "Views\\Home\\CreateProject.cshtml",
       "FileKind": "mvc"
     },
     {

@@ -98,6 +98,13 @@
             <input type = "hidden" name = "date" value = '@Model.SelectedDate' />
             <button type="submit">Check Monthly Times</button>
         </form>
+        <form asp-action = "CreateProject" method="get">
+            <button type="submit">Create new Project</button>
+        </form>
+
+        
+        <a asp-action="ProjectManagment">Manage projects</a>
+
         @if (Model.Activities.frozen != true)
         {
         <form asp-action = "FreezeMonth" method="post">
