@@ -86,3 +86,7 @@
 /home/swo/Projekt_NTR/lab1/NTR/bin/Debug/netcoreapp3.1/baza/andrzej-2021-12.json
 /home/swo/Projekt_NTR/lab1/NTR/bin/Debug/netcoreapp3.1/baza/kowalski-2021-12.json
 /home/swo/Projekt_NTR/lab1/NTR/obj/Debug/netcoreapp3.1/Razor/Views/Home/MonthlyCheck.cshtml.g.cs
+/home/swo/Projekt_NTR/lab1/NTR/bin/Debug/netcoreapp3.1/baza/andrzej-2021-11.json
+/home/swo/Projekt_NTR/lab1/NTR/bin/Debug/netcoreapp3.1/baza/seba-2021-11.json
+/home/swo/Projekt_NTR/lab1/NTR/obj/Debug/netcoreapp3.1/Razor/Views/Home/CreateProject.cshtml.g.cs
+/home/swo/Projekt_NTR/lab1/NTR/obj/Debug/netcoreapp3.1/Razor/Views/Home/ProjectManagment.cshtml.g.cs

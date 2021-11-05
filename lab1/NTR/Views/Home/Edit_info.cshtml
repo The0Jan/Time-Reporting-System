@@ -21,8 +21,13 @@
         </p>
         <h5>Subcode</h5>
         <p>
-            <input asp-for="@Model.subcode" name = "entry.subcode">
-
+        <select name="entry.subcode">
+                <option value=""></option>
+            @foreach (NTR.Entities.Subactivity subactivity in Model.sub_to_choose)
+            {
+                <option value="@subactivity.code">@subactivity.code</option>
+            }
+        </select>
         </p>
         <h5>Time</h5>
         <p>

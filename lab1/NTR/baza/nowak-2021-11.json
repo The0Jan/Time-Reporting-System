@@ -1,0 +1,13 @@
+{
+  "frozen": false,
+  "entries": [
+    {
+      "date": "2021-11-05",
+      "code": "ARGUS-123",
+      "subcode": "database",
+      "time": 100,
+      "description": "Yes"
+    }
+  ],
+  "accepted": []
+}

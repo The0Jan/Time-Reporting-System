@@ -1,28 +1,88 @@
 {
-    "activities": [
+  "activities": [
     {
-    "code": "ARGUS-123",
-    "manager": "nowak",
-    "name": "Argus",
-    "budget": 125,
-    "active": true,
-    "subactivities":[{"code":"database"},{"code":"other"} ]
+      "code": "ARGUS-123",
+      "manager": "nowak",
+      "name": "Argus",
+      "budget": -90,
+      "active": true,
+      "subactivities": [
+        {
+          "code": "database"
+        },
+        {
+          "code": "other"
+        }
+      ]
     },
     {
-    "code": "OTHER",
-    "manager": "smith",
-    "name": "Other",
-    "budget": -1,
-    "active": true,
-    "subactivities":[]
+      "code": "OTHER",
+      "manager": "nowak",
+      "name": "Other",
+      "budget": 0,
+      "active": true,
+      "subactivities": []
     },
     {
-    "code": "AUSTIN",
-    "manager": "Znachor",
-    "name": "Austin",
-    "budget": 100,
-    "active": false,
-    "subactivities":[{"code":"refactoring"},{"code":"rerefactoring"}, {"code":"fighting HR"},{"code":"getting investors"}]
+      "code": "AUSTIN",
+      "manager": "Znachor",
+      "name": "Austin",
+      "budget": 100,
+      "active": false,
+      "subactivities": [
+        {
+          "code": "refactoring"
+        },
+        {
+          "code": "rerefactoring"
+        },
+        {
+          "code": "fighting HR"
+        },
+        {
+          "code": "getting investors"
+        }
+      ]
+    },
+    {
+      "code": "D4C",
+      "manager": "kowalski",
+      "name": "Dirty Deeds Done Dirt Cheap",
+      "budget": 200,
+      "active": false,
+      "subactivities": []
+    },
+    {
+      "code": "5AMU5",
+      "manager": "kowalski",
+      "name": "Samus",
+      "budget": 888,
+      "active": true,
+      "subactivities": []
+    },
+    {
+      "code": "YES",
+      "manager": "kowalski",
+      "name": "yess",
+      "budget": 100,
+      "active": true,
+      "subactivities": [
+        {
+          "code": "okey"
+        }
+      ]
+    },
+    {
+      "code": "YES",
+      "manager": "kowalski",
+      "name": "yess",
+      "budget": 1000,
+      "active": true,
+      "subactivities": [
+        {
+          "code": "maybe"
+        }
+      ]
     }
-    ]
-    }
+  ]
+}

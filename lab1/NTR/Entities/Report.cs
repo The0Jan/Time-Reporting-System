@@ -26,22 +26,26 @@ namespace NTR.Entities
         public List<Entry> entries {get; set;}
         public List<AcceptedEntry> accepted {get; set;}
 
-        public static Report load(String user, DateTime date)
+        public static Report json_load(String user, DateTime date)
         {
-            var path = $"baza/{user}-{date.Year}-{date.Month}.json";
-            if (!System.IO.File.Exists(path)) {
-                return new Report();
+            var directory  = $"baza/{user}-{date.Year}-{date.Month}.json";
+            if (!System.IO.File.Exists(directory)) {
+                Report fresh_report = new Report();
+                fresh_report.frozen = false;
+                fresh_report.entries = new List<Entry>();
+                fresh_report.accepted = new List<AcceptedEntry>();
+                return fresh_report;
             }
-            var report_json = System.IO.File.ReadAllText(path);
+            var report_json = System.IO.File.ReadAllText(directory);
             return System.Text.Json.JsonSerializer.Deserialize<Report>(report_json);
         }
 
-        public static void save(Report report, String user, DateTime date)
+        public static void json_save(Report report, String user, DateTime date)
         {
-            var path = $"baza/{user}-{date.Year}-{date.Month}.json";
+            var directory = $"baza/{user}-{date.Year}-{date.Month}.json";
             var json_options = new System.Text.Json.JsonSerializerOptions { WriteIndented = true };
             var bytes = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(report, json_options);
-            System.IO.File.WriteAllBytes(path, bytes);
+            System.IO.File.WriteAllBytes(directory, bytes);
         }
     }
 }

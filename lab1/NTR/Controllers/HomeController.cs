@@ -55,7 +55,7 @@ namespace NTR.Controllers
             DateTime date_formatted = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             ActivitiesForDayModel Updated_activities = new ActivitiesForDayModel(Request.Cookies["users"],date_formatted);
             Updated_activities.Activities.entries.RemoveAt(id);
-            Entities.Report.save(Updated_activities.Activities,Request.Cookies["users"],date_formatted );
+            Entities.Report.json_save(Updated_activities.Activities,Request.Cookies["users"],date_formatted );
 
             return View(new ActivitiesForDayModel(Request.Cookies["users"],date_formatted));
         }
@@ -74,6 +74,17 @@ namespace NTR.Controllers
         {
             DateTime date_formatted = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             EditEntryModel edit = new EditEntryModel(new ActivitiesForDayModel(Request.Cookies["users"],date_formatted).Activities.entries[id], id);
+
+            Entities.Project_List project_List =  Entities.Project_List.load();
+
+            foreach(Entities.Activity active in project_List.activities)
+            {
+                if(Equals(active.code, edit.code))
+                {
+                    edit.sub_to_choose =  active.subactivities;
+                    break;
+                }
+            }
             return View(edit);
         }
 
@@ -85,8 +96,9 @@ namespace NTR.Controllers
             activity.Activities.entries[entry.id].subcode = entry.subcode;
             activity.Activities.entries[entry.id].description = entry.description;
             activity.Activities.entries[entry.id].time = entry.time;
+            activity.Activities.entries[entry.id].subcode = entry.subcode;
 
-            Entities.Report.save(activity.Activities,Request.Cookies["users"],date_formatted );
+            Entities.Report.json_save(activity.Activities,Request.Cookies["users"],date_formatted );
 
             return RedirectToAction("Account", "Home", new {@date = date_formatted});
         }
@@ -95,6 +107,7 @@ namespace NTR.Controllers
         [HttpGet]
         public IActionResult Create(string date)
         {
+            ViewBag.date = date;
             return View(new ActivityModel());
         }
 
@@ -111,7 +124,7 @@ namespace NTR.Controllers
             new_entry.description = entry.description;
 
             activity.Activities.entries.Add(new_entry);
-            Entities.Report.save(activity.Activities,Request.Cookies["users"],date_formatted );
+            Entities.Report.json_save(activity.Activities,Request.Cookies["users"],date_formatted );
 
             return RedirectToAction("Account", "Home", new {@date = date_formatted});
         }
@@ -119,8 +132,123 @@ namespace NTR.Controllers
         [HttpGet]
         public IActionResult MonthlyCheck(string date)
         {
+            ViewBag.date = date;
             return View(new MonthlyCheckModel(Request.Cookies["users"],date));
         }
+        [HttpGet]
+        public IActionResult CreateProject()
+        {
+            ViewBag.name = Request.Cookies["users"];
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateProject(Entities.Activity entry, string subactivity)
+        {
+ 
+            Entities.Subactivity new_subactivity = new Entities.Subactivity();
+            new_subactivity.code = subactivity;
+            entry.subactivities = new List<Entities.Subactivity>();
+
+            entry.subactivities.Add(new_subactivity);
+
+            ActivityModel projects = new ActivityModel();
+            entry.active = true;
+            projects.project_list.activities.Add(entry);
+            Entities.Project_List.save(projects.project_list);
+
+            return RedirectToAction("Account", "Home");
+        }
+
+
+
+        [HttpGet]
+        public IActionResult ProjectManagment(DateTime? date, string project, string member)
+        {
+
+            ViewBag.name = Request.Cookies["users"];
+            
+            if (!date.HasValue || project == null)
+            {
+                ViewBag.date = "Not Yet selected";
+                return View(new ProjectManagmentModel(Request.Cookies["users"]));
+            }
+            else
+            {
+                ViewBag.show_date = date.Value.ToString("yyyy-MM", CultureInfo.InvariantCulture);
+                ViewBag.return_date = date.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+                return View(new ProjectManagmentModel(Request.Cookies["users"], project, date.Value, member));   
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult CloseProject(DateTime date, string project, string member)
+        {
+            Entities.Project_List updated_list =  Entities.Project_List.load();
+            for(int i=0; i<updated_list.activities.Count; i++)
+            {
+                if(Equals(updated_list.activities[i].code, project))
+                {
+                    updated_list.activities[i].active = false;
+                    break;
+                }
+            }
+            Entities.Project_List.save(updated_list);
+
+            return RedirectToAction("ProjectManagment", "Home", new {@date = date, @project = project, @member = member});
+        }
+        
+        [HttpPost]
+        public IActionResult ProjectManagment(int accepted_time, string member, DateTime month, string project, int previous_accepted_time, int budget)
+        {
+            Entities.Report new_report = Entities.Report.json_load(member, month);
+            for(int i=0; i<new_report.accepted.Count; i++)
+            {
+                if(Equals(new_report.accepted[i].code, project))
+                {
+                    new_report.accepted[i].time = accepted_time;
+                    break;
+                }
+            }
+
+            if(0 == new_report.accepted.Count )
+            {
+                Entities.AcceptedEntry new_entry = new Entities.AcceptedEntry();
+                new_entry.time = accepted_time;
+                new_entry.code = project;
+                new_report.accepted = new List<Entities.AcceptedEntry>();
+                new_report.accepted.Add(new_entry);
+            }
+            Entities.Report.json_save(new_report,member, month);
+
+            int correct = accepted_time - previous_accepted_time ;
+            Entities.Project_List updated_list =  Entities.Project_List.load();
+            for(int i=0; i<updated_list.activities.Count; i++)
+            {
+                if(Equals(updated_list.activities[i].code, project))
+                {
+                    updated_list.activities[i].budget = budget - correct;
+                    break;
+                }
+            }
+            Entities.Project_List.save(updated_list);
+            return RedirectToAction("ProjectManagment", "Home", new {@date = month, @project = project, @member = member});
+        }
+
+        [HttpPost]
+        public IActionResult FreezeMonth(string date)
+        {
+            DateTime date_formatted = DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            ActivitiesForDayModel activity = new ActivitiesForDayModel(Request.Cookies["users"],date_formatted); 
+            activity.Activities.frozen = true;
+
+            Entities.Report.json_save(activity.Activities,Request.Cookies["users"],date_formatted );
+
+            return RedirectToAction("Account", "Home", new {@date = date_formatted});
+
+        }
+
         public IActionResult LogOut()
         {
             if (Request.Cookies["users"] != null)

@@ -63,7 +63,26 @@
       "subcode": null,
       "time": 100,
       "description": "Okey"
+    },
+    {
+      "date": "2021-11-14",
+      "code": "ARGUS-123",
+      "subcode": "database",
+      "time": 1000,
+      "description": "Nothing"
+    },
+    {
+      "date": "2021-11-05",
+      "code": "AUSTIN",
+      "subcode": "rerefactoring",
+      "time": 100,
+      "description": "i did stuff"
     }
   ],
-  "accepted": []
+  "accepted": [
+    {
+      "code": "ARGUS-123",
+      "time": 100
+    }
+  ]
 }
