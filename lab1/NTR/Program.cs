@@ -7,8 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-using Sustem = System;
-using Amogus = System.Text;
 namespace NTR
 {
     public class Program
