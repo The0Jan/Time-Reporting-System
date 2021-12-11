@@ -8,6 +8,9 @@ namespace NTR.Data
     public interface IDataContext 
     {
         DbSet<UserModel> Users {get; set;}
+        DbSet<ProjectModel> Projects {get; set;}
+        DbSet<SubcodeModel> Subcodes {get; set;}
+        DbSet<ActivityModel> Activities {get; set;}
 
     }
 }

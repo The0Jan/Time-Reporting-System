@@ -10,5 +10,9 @@ namespace NTR.Data
         {
         }
         public DbSet<NTR.Models.UserModel> Users { get; set; }
+        public DbSet<NTR.Models.ProjectModel> Projects { get; set; }
+        public DbSet<NTR.Models.ActivityModel> Activities { get; set; }
+        public DbSet<NTR.Models.SubcodeModel> Subcodes { get; set; }
+
     }
 }

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace NTR.Models
 {
-    public class Subcode
+    public class SubcodeModel
     {
-        public string Project_Code { get; set; }
-        public string Project_Subcode { get; set; }
+        public string ProjectModelId { get; set; }
+        public string SubcodeModelId { get; set; }
     }
 }
