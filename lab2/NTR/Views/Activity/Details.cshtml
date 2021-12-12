@@ -1,0 +1,56 @@
+@model ActivityModel
+<h1>Details</h1>
+<body>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Project Name
+            </th>
+            <th>
+                Subcode
+            </th>
+            <th>
+                Time
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Model.ActivityModelId
+            </td>
+            <td>
+                @ViewBag.project
+            </td>
+            <td>
+                @ViewBag.subcode
+            </td>
+            <td>
+                @Model.Time
+            </td>
+            <td>
+                @Model.Description
+            </td>
+            <td>
+                @Model.Date
+            </td>
+
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="List">Back to List</a>
+</p>
+</body>

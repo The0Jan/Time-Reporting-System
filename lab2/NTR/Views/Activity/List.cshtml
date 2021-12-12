@@ -2,9 +2,10 @@
 
 @{
     ViewData["Title"] = "Index";
+    int sum = 0;
 }
 
-<h1>Index</h1>
+<h1>List</h1>
 <body>
         <div class="text-center">
             <form>
@@ -17,46 +18,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ActivityModelId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjectModelId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SubcodeModelId)
+                Activity Index
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Time)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Frozen)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
+        sum = sum + item.Time;
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ActivityModelId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectModelId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubcodeModelId)
+                @item.ActivityModelId
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Frozen)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ActivityModelId">Edit</a> |
@@ -67,7 +44,7 @@
 }
     </tbody>
 </table>
-
+<p> Total time spent on projects: @sum </p>
 <p>
     <a asp-action="Create" >Create New</a>
 </p>

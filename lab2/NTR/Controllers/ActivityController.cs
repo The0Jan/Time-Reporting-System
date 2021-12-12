@@ -73,5 +73,18 @@ namespace NTR.Controllers
    
         }
 
+        [HttpGet]
+        public IActionResult Details(int id){
+            var activity = _context.Activities.FirstOrDefault(m => m.ActivityModelId == id);
+            var project = _context.Projects.FirstOrDefault(m => m.ProjectModelId == activity.ProjectModelId);
+            var subcode = _context.Subcodes.FirstOrDefault(m => m.SubcodeModelId == activity.SubcodeModelId);
+
+            ViewBag.project = project.Title;
+            ViewBag.subcode = subcode.name;
+            return View( activity);
+        }
+
+
+
     }
 }
