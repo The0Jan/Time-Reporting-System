@@ -1,0 +1,74 @@
+@model IEnumerable<NTR.Models.ActivityModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<body>
+        <div class="text-center">
+            <form>
+            <h2> Today is @ViewBag.date </h2>
+            <p>Change preview date</p>
+            <input type="date" name="date" onchange="this.form.submit()">
+            </form>
+        </div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityModelId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectModelId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubcodeModelId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Frozen)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActivityModelId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectModelId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubcodeModelId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Frozen)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ActivityModelId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ActivityModelId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ActivityModelId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="Create" >Create New</a>
+</p>
+</body>

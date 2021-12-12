@@ -39,7 +39,7 @@ namespace NTR.Controllers
 
             Response.Cookies.Append("users_UserModelId", ID, options);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("List", "Activity");
         }
 
       public IActionResult LogOut()

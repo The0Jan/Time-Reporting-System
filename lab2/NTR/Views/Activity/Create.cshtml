@@ -1,0 +1,42 @@
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ActivityModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <h5>Date</h5>
+                <input type="date" class="form-control" name = "date" value = "@ViewBag.date" > 
+            </div>
+            <div class="form-group">
+                <h5>Project Code</h5>
+                <input type="text" class="form-control" name = "ProjectName" value = "@ViewBag.project" />
+            </div>
+            <div class="form-group">
+                <h5>Project Subcode</h5>
+                <input type="text" class="form-control" name = "Subcode" value = "@ViewBag.subcode" />
+            </div>
+            <div class="form-group">
+                <h5>Time</h5>
+                <input type="number" class="form-control" name = "Time" value = "@ViewBag.times" />
+            </div>
+            <div class="form-group">
+                <h5>Description</h5>
+                <input type="text" class="form-control" name = "Description" value = "@ViewBag.description" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="List">Back to List</a>
+</div>

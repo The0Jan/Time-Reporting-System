@@ -45,3 +45,5 @@ C:\Users\Jan\Desktop\apki\Projekt_NTR\ntr21z-walczak-jan\lab2\NTR\obj\Debug\net5
 C:\Users\Jan\Desktop\apki\Projekt_NTR\ntr21z-walczak-jan\lab2\NTR\obj\Debug\net5.0\ref\NTR.dll
 C:\Users\Jan\Desktop\apki\Projekt_NTR\ntr21z-walczak-jan\lab2\NTR\obj\Debug\net5.0\NTR.pdb
 C:\Users\Jan\Desktop\apki\Projekt_NTR\ntr21z-walczak-jan\lab2\NTR\obj\Debug\net5.0\NTR.genruntimeconfig.cache
+C:\Users\Jan\Desktop\apki\Projekt_NTR\ntr21z-walczak-jan\lab2\NTR\obj\Debug\net5.0\Razor\Views\Activity\Create.cshtml.g.cs
+C:\Users\Jan\Desktop\apki\Projekt_NTR\ntr21z-walczak-jan\lab2\NTR\obj\Debug\net5.0\Razor\Views\Activity\List.cshtml.g.cs

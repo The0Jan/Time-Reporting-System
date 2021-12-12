@@ -7,7 +7,8 @@ namespace NTR.Models
 {
     public class SubcodeModel
     {
-        public string ProjectModelId { get; set; }
-        public string SubcodeModelId { get; set; }
+        public int ProjectModelId { get; set; }
+        public int SubcodeModelId { get; set; }
+        public string name {get; set;}
     }
 }

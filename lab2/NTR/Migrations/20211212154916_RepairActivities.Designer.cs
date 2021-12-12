@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NTR.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211212093726_SecondaryMigrations")]
-    partial class SecondaryMigrations
+    [Migration("20211212154916_RepairActivities")]
+    partial class RepairActivities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,11 +37,11 @@ namespace NTR.Migrations
                     b.Property<bool>("Frozen")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("ProjectModelId")
-                        .HasColumnType("text");
+                    b.Property<int>("ProjectModelId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("SubcodeModelId")
-                        .HasColumnType("text");
+                    b.Property<int>("SubcodeModelId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Time")
                         .HasColumnType("integer");
@@ -61,14 +61,14 @@ namespace NTR.Migrations
                         .HasColumnType("integer")
                         .UseIdentityByDefaultColumn();
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
                     b.Property<int>("UserModelId")
                         .HasColumnType("integer");
-
-                    b.Property<bool>("active")
-                        .HasColumnType("boolean");
 
                     b.HasKey("ProjectModelId");
 
@@ -77,13 +77,20 @@ namespace NTR.Migrations
 
             modelBuilder.Entity("NTR.Models.SubcodeModel", b =>
                 {
-                    b.Property<string>("SubcodeModelId")
-                        .HasColumnType("text");
+                    b.Property<int>("SubcodeModelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
 
-                    b.Property<string>("ProjectModelId")
+                    b.Property<int>("ProjectModelId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("name")
                         .HasColumnType("text");
 
                     b.HasKey("SubcodeModelId");
+
+                    b.HasIndex("ProjectModelId");
 
                     b.ToTable("Subcodes");
                 });
@@ -104,6 +111,20 @@ namespace NTR.Migrations
                     b.HasKey("UserModelId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("NTR.Models.SubcodeModel", b =>
+                {
+                    b.HasOne("NTR.Models.ProjectModel", null)
+                        .WithMany("Subcodes")
+                        .HasForeignKey("ProjectModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("NTR.Models.ProjectModel", b =>
+                {
+                    b.Navigation("Subcodes");
                 });
 #pragma warning restore 612, 618
         }

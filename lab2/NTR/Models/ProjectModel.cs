@@ -10,6 +10,7 @@ namespace NTR.Models
         public int ProjectModelId { get; set; }
         public int UserModelId { get; set; } 
         public string Title { get; set; }
-        public bool active { get; set; }
+        public bool Active { get; set; }
+        public ICollection<SubcodeModel> Subcodes {get; set;}
     }
 }
