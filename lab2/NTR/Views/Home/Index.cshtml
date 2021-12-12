@@ -1,8 +1,23 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<NTR.Models.UserModel>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <form asp-route="Index" method="post">
+        <fieldset>
+            <legend>System raportowania Czasu</legend>
+            <select name="id" >
+            @foreach (var users in Model)
+            {
+                <option value="@users.UserModelId"> @users.Last_Name @users.First_Name </option>
+            }
+            </select>
+
+        </fieldset>
+        <button type="submit">Log In</button>
+    </form>
+</body>
+</html>
