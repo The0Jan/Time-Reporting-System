@@ -85,6 +85,35 @@ namespace NTR.Controllers
         }
 
 
+        public IActionResult Delete(int id){
+            var activity = _context.Activities.FirstOrDefault(m => m.ActivityModelId == id);
+            _context.Activities.Remove(activity);
+            _context.SaveChanges();
+
+            return RedirectToAction("List", "Activity", new {@date = activity.Date});
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id){
+            var activity = _context.Activities.FirstOrDefault(m => m.ActivityModelId == id);
+            var project = _context.Projects.FirstOrDefault(m => m.ProjectModelId == activity.ProjectModelId);
+            var subcode = _context.Subcodes.FirstOrDefault(m => m.SubcodeModelId == activity.SubcodeModelId);
+
+            ViewBag.project = project.Title;
+            ViewBag.subcode = subcode.name;
+            return View( activity);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, int Time, string Description){
+            var activity = _context.Activities.FirstOrDefault(m => m.ActivityModelId == id);
+            activity.Time = Time;
+            activity.Description = Description;
+
+            _context.Update(activity);
+            _context.SaveChanges();
+            return RedirectToAction("List", "Activity", new {@date = activity.Date});
+        }
 
     }
 }

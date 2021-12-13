@@ -8,6 +8,9 @@
                 Id
             </th>
             <th>
+                Date
+            </th>
+            <th>
                 Project Name
             </th>
             <th>
@@ -19,16 +22,16 @@
             <th>
                 Description
             </th>
-            <th>
-                Date
-            </th>
-            <th></th>
+
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>
                 @Model.ActivityModelId
+            </td>
+            <td>
+                @Model.Date
             </td>
             <td>
                 @ViewBag.project
@@ -42,10 +45,6 @@
             <td>
                 @Model.Description
             </td>
-            <td>
-                @Model.Date
-            </td>
-
         </tr>
     </tbody>
 </table>
