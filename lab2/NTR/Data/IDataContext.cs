@@ -11,6 +11,7 @@ namespace NTR.Data
         DbSet<ProjectModel> Projects {get; set;}
         DbSet<SubcodeModel> Subcodes {get; set;}
         DbSet<ActivityModel> Activities {get; set;}
+        DbSet<ProjectPartake> ProjectPartakes {get; set;}
 
     }
 }

@@ -13,6 +13,7 @@ namespace NTR.Data
         public DbSet<NTR.Models.ProjectModel> Projects { get; set; }
         public DbSet<NTR.Models.ActivityModel> Activities { get; set; }
         public DbSet<NTR.Models.SubcodeModel> Subcodes { get; set; }
+        public DbSet<NTR.Models.ProjectPartake> ProjectPartakes { get; set; }
 
     }
 }

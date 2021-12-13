@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NTR.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NTR.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211213191003_ProkectPartake")]
+    partial class ProkectPartake
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,39 +73,6 @@ namespace NTR.Migrations
                     b.HasKey("ProjectModelId");
 
                     b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("NTR.Models.ProjectPartake", b =>
-                {
-                    b.Property<int>("ProjectPartakeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
-
-                    b.Property<int>("AcceptedTime")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Month")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ProjectModelId")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("Submitted")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("SubmittedTime")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("UserModelId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("integer");
-
-                    b.HasKey("ProjectPartakeId");
-
-                    b.ToTable("ProjectPartakes");
                 });
 
             modelBuilder.Entity("NTR.Models.SubcodeModel", b =>
