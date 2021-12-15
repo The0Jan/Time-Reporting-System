@@ -53,16 +53,15 @@ namespace NTR.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(DateTime date, string ProjectName, string Subcode, int Time, string Description)
+        public IActionResult Create(DateTime date, string ProjectName, string? Subcode, int Time, string? Description)
         {
-
-            if(ProjectName==null || Subcode == null)
+            var project = _context.Projects.FirstOrDefault(m => m.Title == ProjectName.ToUpper());   
+            if(ProjectName==null || Subcode == null || project.Active == false)
             {
                 return RedirectToAction("Create", "Activity", new {@date = date, @ProjectName = ProjectName, @Subcode=Subcode, @Time=Time, @Description=Description});
             }
             else
             {
-                var project = _context.Projects.FirstOrDefault(m => m.Title == ProjectName.ToUpper());   
                 ActivityModel activityModel = new ActivityModel();
                 activityModel.UserModelId = Convert.ToInt32(Request.Cookies["users_UserModelId"]);
                 activityModel.ProjectModelId = project.ProjectModelId;

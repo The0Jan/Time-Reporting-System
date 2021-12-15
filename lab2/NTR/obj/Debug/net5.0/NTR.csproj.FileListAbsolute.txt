@@ -50,3 +50,5 @@ C:\Users\Jan\Desktop\apki\Projekt_NTR\ntr21z-walczak-jan\lab2\NTR\obj\Debug\net5
 C:\Users\Jan\Desktop\apki\Projekt_NTR\ntr21z-walczak-jan\lab2\NTR\obj\Debug\net5.0\Razor\Views\Activity\Details.cshtml.g.cs
 C:\Users\Jan\Desktop\apki\Projekt_NTR\ntr21z-walczak-jan\lab2\NTR\obj\Debug\net5.0\Razor\Views\Activity\Edit.cshtml.g.cs
 C:\Users\Jan\Desktop\apki\Projekt_NTR\ntr21z-walczak-jan\lab2\NTR\obj\Debug\net5.0\Razor\Views\Project\List.cshtml.g.cs
+C:\Users\Jan\Desktop\apki\Projekt_NTR\ntr21z-walczak-jan\lab2\NTR\obj\Debug\net5.0\Razor\Views\Project\MyProjects.cshtml.g.cs
+C:\Users\Jan\Desktop\apki\Projekt_NTR\ntr21z-walczak-jan\lab2\NTR\obj\Debug\net5.0\Razor\Views\Project\Create.cshtml.g.cs

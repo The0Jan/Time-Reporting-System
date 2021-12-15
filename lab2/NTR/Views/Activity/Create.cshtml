@@ -12,11 +12,11 @@
         <form asp-action="Create">
             <div class="form-group">
                 <h5>Date</h5>
-                <input type="date" class="form-control" name = "date" value = "@ViewBag.date" > 
+                <input type="date" class="form-control" name = "date" value = "@ViewBag.date" required> 
             </div>
             <div class="form-group">
                 <h5>Project Code</h5>
-                <input type="text" class="form-control" name = "ProjectName" value = "@ViewBag.project" />
+                <input type="text" class="form-control" name = "ProjectName" value = "@ViewBag.project" required/>
             </div>
             <div class="form-group">
                 <h5>Project Subcode</h5>
@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <h5>Time</h5>
-                <input type="number" class="form-control" name = "Time" value = "@ViewBag.times" />
+                <input type="number" class="form-control" name = "Time" value = "@ViewBag.times" required/>
             </div>
             <div class="form-group">
                 <h5>Description</h5>
