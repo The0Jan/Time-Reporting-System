@@ -1,0 +1,74 @@
+@{
+    int index = 0;
+    DateTime today = DateTime.Today;
+}
+@model IEnumerable<ProjectPartake>
+
+<h1>My monthly activity</h1>
+<body>
+        <div class="text">
+            <form asp-action="List" method="get">
+            <h5>Year</h5>
+            <input type="number" name="Year" min = "2000" max = "2050" value="@today.Year">
+            <h5>Month</h5>
+            <input type="number" name="Month" min = "1" max = "12" value="@today.Month" >
+            <br>
+            <input type="submit" value="Search" class="btn btn-primary" />
+            </form>
+        </div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Project Name
+            </th>
+            <th>
+                Year
+            </th>
+            <th>
+                Month
+            </th>
+            <th>
+                Sumitted Time
+            </th>
+            <th>
+                Accepted Time
+            </th>
+            <th>
+                Was Submitted?
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.ProjectPartakeId
+            </td>
+            <td>
+                @ViewBag.projects[index]
+            </td>
+            <td>
+                @item.Year
+            </td>
+            <td>
+                @item.Month
+            </td>
+            <td>
+                @item.SubmittedTime
+            </td>
+            <td>
+                @item.AcceptedTime
+            </td>
+            <td>
+                @item.Submitted
+            </td>
+        </tr>
+        index += 1;
+}
+    </tbody>
+</table>
+</body>
