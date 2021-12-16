@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NTR.Data;
 
 namespace NTR.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211216210256_TimeStamp4")]
+    partial class TimeStamp4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +46,7 @@ namespace NTR.Migrations
                     b.Property<DateTime>("Timestamp")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime(0)");
+                        .HasColumnType("datetime(3)");
 
                     b.Property<int>("UserModelId")
                         .HasColumnType("int");
@@ -69,7 +71,7 @@ namespace NTR.Migrations
                     b.Property<DateTime>("Timestamp")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime(0)");
+                        .HasColumnType("datetime(3)");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
@@ -106,7 +108,7 @@ namespace NTR.Migrations
                     b.Property<DateTime>("Timestamp")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime(0)");
+                        .HasColumnType("datetime(3)");
 
                     b.Property<int>("UserModelId")
                         .HasColumnType("int");

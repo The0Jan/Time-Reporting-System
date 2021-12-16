@@ -32,6 +32,9 @@ namespace NTR.Controllers
             else {
                 new_date = DateTime.Today;
             }
+            if(TempData["error"] != null){
+                ViewBag.error = TempData["error"].ToString();
+            }
             ViewBag.date = new_date;
             ViewBag.submitted = 0;
             var partaking = _context.ProjectPartakes.FirstOrDefault(m => m.UserModelId == id && m.Year == new_date.Year && m.Month == new_date.Month);
@@ -113,8 +116,21 @@ namespace NTR.Controllers
 
         public IActionResult Delete(int id){
             var activity = _context.Activities.FirstOrDefault(m => m.ActivityModelId == id);
-            var partaking = _context.ProjectPartakes.FirstOrDefault(m => m.ProjectModelId == activity.ProjectModelId && m.UserModelId == Convert.ToInt32(Request.Cookies["users_UserModelId"]));
+
+            if (activity == null)
+            {
+                TempData["error"] = "Unable to save changes. Somebody already deleted that activity.";
+                return RedirectToAction("List", "Activity");
+            }
+
+            var partaking = _context.ProjectPartakes.FirstOrDefault(m => m.ProjectModelId == activity.ProjectModelId 
+            && m.UserModelId == activity.UserModelId && m.Month == activity.Date.Month && m.Year == activity.Date.Year);
+            if (partaking.Submitted == true){
+                TempData["error"] = "Delete Entry. Somebody already submitted this month.";
+                return RedirectToAction("List", "Activity",  new {@date = activity.Date});
+            }
             partaking.SubmittedTime -= activity.Time;
+
 
             _context.ProjectPartakes.Update(partaking);
             _context.Activities.Remove(activity);
@@ -129,6 +145,9 @@ namespace NTR.Controllers
             var project = _context.Projects.FirstOrDefault(m => m.ProjectModelId == activity.ProjectModelId);
             var subcode = _context.Subcodes.FirstOrDefault(m => m.SubcodeModelId == activity.SubcodeModelId);
 
+            if(TempData["error"] != null){
+                ViewBag.error = TempData["error"].ToString();
+            }
 
             ViewBag.project = project.Title;
             ViewBag.subcode = subcode.name;
@@ -136,21 +155,42 @@ namespace NTR.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, int Time, string Description){
+        public IActionResult Edit(int id, int Time, string Description, DateTime Timestamp){
             var activity = _context.Activities.FirstOrDefault(m => m.ActivityModelId == id);
-            var partaking = _context.ProjectPartakes.FirstOrDefault(m => m.ProjectModelId == activity.ProjectModelId && m.UserModelId == activity.UserModelId);
-            int Time_dif = Time - activity.Time;
 
+            if (activity == null)
+            {
+                TempData["error"] = "Unable to save changes. Somebody already deleted that activity.";
+                return RedirectToAction("List", "Activity");
+            }
+
+            var partaking = _context.ProjectPartakes.FirstOrDefault(m => m.ProjectModelId == activity.ProjectModelId 
+            && m.UserModelId == activity.UserModelId && m.Month == activity.Date.Month && m.Year == activity.Date.Year);
+
+            if (partaking.Submitted == true){
+                TempData["error"] = "Unable to save changes. Somebody already submitted this month.";
+                return RedirectToAction("List", "Activity",  new {@date = activity.Date});
+            }
+
+            int Time_dif = Time - activity.Time;
             activity.Time = Time;
             activity.Description = Description;
-
             partaking.SubmittedTime += Time_dif;
 
-            _context.Update(partaking);
-            _context.Update(activity);
-            _context.SaveChanges();
-            return RedirectToAction("List", "Activity", new {@date = activity.Date});
+            if(DateTime.Equals(activity.Timestamp, Timestamp)){
+                _context.Update(partaking);
+                _context.Update(activity);
+                _context.SaveChanges();
+                return RedirectToAction("List", "Activity", new {@date = activity.Date});
+
+            }
+            else{
+                TempData["error"] = "Somebody already changed this activity.";
+                return RedirectToAction("Edit", "Activity", new {@id = id});
+            }
+
         }
+
 
         public IActionResult Submit(DateTime date){
             int id = Convert.ToInt32(Request.Cookies["users_UserModelId"]);

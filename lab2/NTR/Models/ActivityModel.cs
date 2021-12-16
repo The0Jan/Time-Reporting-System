@@ -13,11 +13,12 @@ namespace NTR.Models
         public int UserModelId { get; set; } 
         public int ProjectModelId { get; set; }
         public int SubcodeModelId { get; set; }
-        public DateTime?  Date {get; set;}
+        public DateTime  Date {get; set;}
         public int Time { get; set; }
         public string Description { get; set; }
         public bool Frozen { get; set; }
 
+        [ConcurrencyCheck]
         [Timestamp]
         public DateTime Timestamp { get; set; }
         public ActivityModel()

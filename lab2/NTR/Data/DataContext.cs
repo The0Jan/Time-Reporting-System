@@ -19,19 +19,20 @@ namespace NTR.Data
         {
             builder.Entity<ActivityModel>()
                 .Property(c => c.Timestamp)
-                .HasColumnType("datetime(3)")
+                .HasColumnType("datetime(0)")
                 .IsRequired()
                 .IsRowVersion();
             builder.Entity<ProjectModel>()
                 .Property(c => c.Timestamp)
-                .HasColumnType("datetime(3)")
+                .HasColumnType("datetime(0)")
                 .IsRequired()
                 .IsRowVersion();
             builder.Entity<ProjectPartake>()
                 .Property(c => c.Timestamp)
-                .HasColumnType("datetime(3)")
+                .HasColumnType("datetime(0)")
                 .IsRequired()
                 .IsRowVersion();
         }
+        
     }
 }

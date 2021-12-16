@@ -7,6 +7,12 @@
 
 <h1>List</h1>
 <body>
+        @if (!string.IsNullOrEmpty(ViewBag.error))
+        {
+            <script type="text/javascript">
+                alert("@ViewBag.error");
+            </script>
+        }
         <div class="text-center">
             <form>
             <h2> Today is @ViewBag.date </h2>
