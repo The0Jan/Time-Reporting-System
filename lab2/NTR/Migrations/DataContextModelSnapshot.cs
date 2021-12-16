@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NTR.Data;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace NTR.Migrations
 {
@@ -15,37 +14,40 @@ namespace NTR.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityByDefaultColumns()
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("ProductVersion", "3.1.10")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("NTR.Models.ActivityModel", b =>
                 {
                     b.Property<int>("ActivityModelId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("Date")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<bool>("Frozen")
-                        .HasColumnType("boolean");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("ProjectModelId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("SubcodeModelId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Time")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime(3)");
 
                     b.Property<int>("UserModelId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("ActivityModelId");
 
@@ -56,20 +58,24 @@ namespace NTR.Migrations
                 {
                     b.Property<int>("ProjectModelId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .HasColumnType("int");
 
                     b.Property<bool>("Active")
-                        .HasColumnType("boolean");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("Budget")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime(3)");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
                     b.Property<int>("UserModelId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("ProjectModelId");
 
@@ -80,29 +86,33 @@ namespace NTR.Migrations
                 {
                     b.Property<int>("ProjectPartakeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .HasColumnType("int");
 
                     b.Property<int>("AcceptedTime")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Month")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("ProjectModelId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<bool>("Submitted")
-                        .HasColumnType("boolean");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("SubmittedTime")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime(3)");
 
                     b.Property<int>("UserModelId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Year")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("ProjectPartakeId");
 
@@ -113,11 +123,10 @@ namespace NTR.Migrations
                 {
                     b.Property<int>("SubcodeModelId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .HasColumnType("int");
 
                     b.Property<int>("ProjectModelId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("name")
                         .HasColumnType("text");
@@ -133,8 +142,7 @@ namespace NTR.Migrations
                 {
                     b.Property<int>("UserModelId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .HasColumnType("int");
 
                     b.Property<string>("First_Name")
                         .HasColumnType("text");
@@ -154,11 +162,6 @@ namespace NTR.Migrations
                         .HasForeignKey("ProjectModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("NTR.Models.ProjectModel", b =>
-                {
-                    b.Navigation("Subcodes");
                 });
 #pragma warning restore 612, 618
         }

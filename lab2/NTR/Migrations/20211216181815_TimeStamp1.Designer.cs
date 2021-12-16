@@ -5,49 +5,51 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NTR.Data;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace NTR.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211213191003_ProkectPartake")]
-    partial class ProkectPartake
+    [Migration("20211216181815_TimeStamp1")]
+    partial class TimeStamp1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityByDefaultColumns()
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("ProductVersion", "3.1.10")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("NTR.Models.ActivityModel", b =>
                 {
                     b.Property<int>("ActivityModelId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("Date")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<bool>("Frozen")
-                        .HasColumnType("boolean");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("ProjectModelId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("varbinary(4000)");
 
                     b.Property<int>("SubcodeModelId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Time")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("UserModelId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("ActivityModelId");
 
@@ -58,32 +60,75 @@ namespace NTR.Migrations
                 {
                     b.Property<int>("ProjectModelId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .HasColumnType("int");
 
                     b.Property<bool>("Active")
-                        .HasColumnType("boolean");
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("Budget")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("varbinary(4000)");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
                     b.Property<int>("UserModelId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("ProjectModelId");
 
                     b.ToTable("Projects");
                 });
 
+            modelBuilder.Entity("NTR.Models.ProjectPartake", b =>
+                {
+                    b.Property<int>("ProjectPartakeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("AcceptedTime")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectModelId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("varbinary(4000)");
+
+                    b.Property<bool>("Submitted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("SubmittedTime")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserModelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProjectPartakeId");
+
+                    b.ToTable("ProjectPartakes");
+                });
+
             modelBuilder.Entity("NTR.Models.SubcodeModel", b =>
                 {
                     b.Property<int>("SubcodeModelId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .HasColumnType("int");
 
                     b.Property<int>("ProjectModelId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("name")
                         .HasColumnType("text");
@@ -99,8 +144,7 @@ namespace NTR.Migrations
                 {
                     b.Property<int>("UserModelId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .HasColumnType("int");
 
                     b.Property<string>("First_Name")
                         .HasColumnType("text");
@@ -120,11 +164,6 @@ namespace NTR.Migrations
                         .HasForeignKey("ProjectModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("NTR.Models.ProjectModel", b =>
-                {
-                    b.Navigation("Subcodes");
                 });
 #pragma warning restore 612, 618
         }

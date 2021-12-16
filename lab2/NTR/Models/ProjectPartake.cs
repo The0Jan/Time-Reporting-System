@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace NTR.Models
 {
@@ -15,5 +16,8 @@ namespace NTR.Models
         public int Year {get; set;}
         public int Month {get; set;}
         public bool Submitted {get; set;}
+
+        [Timestamp]
+        public DateTime Timestamp { get; set; }
     }
 }

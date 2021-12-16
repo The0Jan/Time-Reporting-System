@@ -15,5 +15,23 @@ namespace NTR.Data
         public DbSet<NTR.Models.SubcodeModel> Subcodes { get; set; }
         public DbSet<NTR.Models.ProjectPartake> ProjectPartakes { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<ActivityModel>()
+                .Property(c => c.Timestamp)
+                .HasColumnType("datetime(3)")
+                .IsRequired()
+                .IsRowVersion();
+            builder.Entity<ProjectModel>()
+                .Property(c => c.Timestamp)
+                .HasColumnType("datetime(3)")
+                .IsRequired()
+                .IsRowVersion();
+            builder.Entity<ProjectPartake>()
+                .Property(c => c.Timestamp)
+                .HasColumnType("datetime(3)")
+                .IsRequired()
+                .IsRowVersion();
+        }
     }
 }

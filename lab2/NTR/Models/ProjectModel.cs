@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace NTR.Models
 {
@@ -13,5 +14,8 @@ namespace NTR.Models
         public bool Active { get; set; }
         public int Budget {get; set;}
         public ICollection<SubcodeModel> Subcodes {get; set;}
-    }
+
+        [Timestamp]
+        public DateTime Timestamp { get; set; }
+        }
 }

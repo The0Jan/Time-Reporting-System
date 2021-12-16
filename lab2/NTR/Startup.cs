@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NTR.Data;
 using Microsoft.EntityFrameworkCore;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
 namespace NTR
 {
     public class Startup
@@ -25,7 +24,7 @@ namespace NTR
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(options => options.UseMySQL(Configuration.GetConnectionString("Default")));
             services.AddScoped<IDataContext>(provider=> provider.GetService<DataContext>());
             services.AddControllersWithViews();
         }
