@@ -64,7 +64,10 @@ namespace NTR.Controllers
         {
             int id = Convert.ToInt32(Request.Cookies["users_UserModelId"]);
             var myProject = _context.Projects.FirstOrDefault(m=> m.UserModelId == id && m.Title==ProjectTitle);
-
+            
+            if(TempData["error"] != null){
+                ViewBag.error = TempData["error"].ToString();
+            }
             if(myProject == null)
             {
                 ViewBag.project = "Project " + ProjectTitle + " does not exist. Please try again.";
@@ -95,12 +98,23 @@ namespace NTR.Controllers
             }
         }
 
-        public IActionResult Change(int AcceptedTime, int ProjectPartakeId, string ProjectTitle){
+        public IActionResult Change(int AcceptedTime, int ProjectPartakeId, string ProjectTitle, DateTime Timestamp){
             var partaking = _context.ProjectPartakes.FirstOrDefault(m => m.ProjectPartakeId == ProjectPartakeId);
-            int change = AcceptedTime - partaking.AcceptedTime;
+
+            if(!DateTime.Equals(Timestamp, partaking.Timestamp))
+            {
+                TempData["error"] = "Unable to change accepted time. Somebody already changed that.";
+                return  RedirectToAction("MyProjects", "Project", new {@Year = partaking.Year, @Month = partaking.Month, @ProjectTitle = ProjectTitle});
+            }
 
             var project = _context.Projects.FirstOrDefault(m => m.ProjectModelId == partaking.ProjectModelId);
 
+            if(!project.Active)
+            {
+                TempData["error"] = "Unable to change accepted time. Project was shut down.";
+                return  RedirectToAction("MyProjects", "Project", new {@Year = partaking.Year, @Month = partaking.Month, @ProjectTitle = ProjectTitle});
+            }
+            int change = AcceptedTime - partaking.AcceptedTime;
             partaking.AcceptedTime += change;
             project.Budget = project.Budget - change;
 

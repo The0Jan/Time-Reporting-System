@@ -6,6 +6,12 @@
 
 <h1>@ViewBag.project </h1>
 <body>
+        @if (!string.IsNullOrEmpty(ViewBag.error))
+        {
+            <script type="text/javascript">
+                alert("@ViewBag.error");
+            </script>
+        }
         <div class="text">
             <form asp-action="MyProjects" method="get">
             <h5>Year</h5>
@@ -80,6 +86,7 @@ foreach (var item in Model) {
                 @if(@item.Submitted==true){
                     <input type="hidden" name="ProjectPartakeId" value="@item.ProjectPartakeId" >
                     <input type="hidden" name="ProjectTitle" value="@ViewBag.project" >
+                    <input type="hidden" name="Timestamp" value="@item.Timestamp" >
                     <input type="submit" value="Change" class="btn btn-primary" />
                 }
             }
