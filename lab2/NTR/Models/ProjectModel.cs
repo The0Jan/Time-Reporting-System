@@ -15,7 +15,6 @@ namespace NTR.Models
         public int Budget {get; set;}
         public ICollection<SubcodeModel> Subcodes {get; set;}
 
-        [ConcurrencyCheck]
         [Timestamp]
         public DateTime Timestamp { get; set; }
         }

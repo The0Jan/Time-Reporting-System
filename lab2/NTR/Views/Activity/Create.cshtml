@@ -9,6 +9,12 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
+        @if (!string.IsNullOrEmpty(ViewBag.error))
+            {
+                <script type="text/javascript">
+                    alert("@ViewBag.error");
+                </script>
+            }
         <form asp-action="Create">
             <div class="form-group">
                 <h5>Date</h5>

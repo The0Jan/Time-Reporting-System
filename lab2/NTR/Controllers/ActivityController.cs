@@ -52,6 +52,9 @@ namespace NTR.Controllers
             ViewBag.subcode = Subcode;
             ViewBag.times = Time;
             ViewBag.description = Description;
+            if(TempData["error"] != null){
+                ViewBag.error = TempData["error"].ToString();
+            }
             return View();
         }
 
@@ -59,8 +62,13 @@ namespace NTR.Controllers
         public IActionResult Create(DateTime date, string ProjectName, string? Subcode, int Time, string? Description)
         {
             var project = _context.Projects.FirstOrDefault(m => m.Title == ProjectName.ToUpper());   
-            if(ProjectName==null || project.Active == false)
+            if(project==null )
             {
+                TempData["error"] = "There is no such project as " + ProjectName  ;
+                return RedirectToAction("Create", "Activity", new {@date = date, @ProjectName = ProjectName, @Subcode=Subcode, @Time=Time, @Description=Description});
+            }
+            else if(project.Active == false){
+                TempData["error"] = "There is no active project with name  " + ProjectName  ;
                 return RedirectToAction("Create", "Activity", new {@date = date, @ProjectName = ProjectName, @Subcode=Subcode, @Time=Time, @Description=Description});
             }
             else
@@ -85,7 +93,8 @@ namespace NTR.Controllers
                         activityModel.SubcodeModelId = null;
                     }
                 }
-                var partaking = _context.ProjectPartakes.Where(m => m.ProjectModelId == project.ProjectModelId && m.UserModelId == activityModel.UserModelId).FirstOrDefault();
+                var partaking = _context.ProjectPartakes.Where(m => m.ProjectModelId == project.ProjectModelId && m.UserModelId == activityModel.UserModelId
+                && m.Month == date.Month && m.Year == date.Year).FirstOrDefault();
                 if(partaking == null)
                 {
                     ProjectPartake partakings = new ProjectPartake();

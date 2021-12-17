@@ -17,7 +17,6 @@ namespace NTR.Models
         public int Month {get; set;}
         public bool Submitted {get; set;}
 
-        [ConcurrencyCheck]
         [Timestamp]
         public DateTime Timestamp { get; set; }
     }
