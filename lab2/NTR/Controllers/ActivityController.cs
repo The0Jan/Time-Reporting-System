@@ -78,7 +78,12 @@ namespace NTR.Controllers
                 }
                 else{
                     var subcode = _context.Subcodes.Where(m => m.ProjectModelId == project.ProjectModelId).FirstOrDefault(m => m.name == Subcode.ToLower());
+                    if(subcode != null){
                     activityModel.SubcodeModelId = subcode.SubcodeModelId;
+                    }
+                    else{
+                        activityModel.SubcodeModelId = null;
+                    }
                 }
                 var partaking = _context.ProjectPartakes.Where(m => m.ProjectModelId == project.ProjectModelId && m.UserModelId == activityModel.UserModelId).FirstOrDefault();
                 if(partaking == null)
@@ -155,7 +160,9 @@ namespace NTR.Controllers
             }
 
             ViewBag.project = project.Title;
-            ViewBag.subcode = subcode.name;
+            if(subcode != null){
+                ViewBag.subcode = subcode.name;
+            }
             return View( activity);
         }
 
