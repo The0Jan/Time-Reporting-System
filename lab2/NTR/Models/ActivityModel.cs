@@ -18,6 +18,7 @@ namespace NTR.Models
         public string Description { get; set; }
         public bool Frozen { get; set; }
 
+        [ConcurrencyCheck]
         [Timestamp]
         public DateTime Timestamp { get; set; }
         public ActivityModel()

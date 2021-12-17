@@ -51,7 +51,7 @@ namespace NTR.Controllers
             ViewBag.project = ProjectName;
             ViewBag.subcode = Subcode;
             ViewBag.times = Time;
-            ViewBag.description = Description;
+            ViewBag.description = Description; 
             if(TempData["error"] != null){
                 ViewBag.error = TempData["error"].ToString();
             }
