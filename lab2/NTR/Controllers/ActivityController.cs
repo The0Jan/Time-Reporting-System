@@ -59,7 +59,7 @@ namespace NTR.Controllers
         public IActionResult Create(DateTime date, string ProjectName, string? Subcode, int Time, string? Description)
         {
             var project = _context.Projects.FirstOrDefault(m => m.Title == ProjectName.ToUpper());   
-            if(ProjectName==null || Subcode == null || project.Active == false)
+            if(ProjectName==null || project.Active == false)
             {
                 return RedirectToAction("Create", "Activity", new {@date = date, @ProjectName = ProjectName, @Subcode=Subcode, @Time=Time, @Description=Description});
             }
@@ -73,10 +73,13 @@ namespace NTR.Controllers
                 activityModel.Description = Description;
                 activityModel.Frozen = false;
 
-
-                var subcode = _context.Subcodes.Where(m => m.ProjectModelId == project.ProjectModelId).FirstOrDefault(m => m.name == Subcode.ToLower());
-                activityModel.SubcodeModelId = subcode.SubcodeModelId;
-                
+                if(Subcode == null){
+                    activityModel.SubcodeModelId = null;
+                }
+                else{
+                    var subcode = _context.Subcodes.Where(m => m.ProjectModelId == project.ProjectModelId).FirstOrDefault(m => m.name == Subcode.ToLower());
+                    activityModel.SubcodeModelId = subcode.SubcodeModelId;
+                }
                 var partaking = _context.ProjectPartakes.Where(m => m.ProjectModelId == project.ProjectModelId && m.UserModelId == activityModel.UserModelId).FirstOrDefault();
                 if(partaking == null)
                 {
@@ -109,7 +112,9 @@ namespace NTR.Controllers
             var subcode = _context.Subcodes.FirstOrDefault(m => m.SubcodeModelId == activity.SubcodeModelId);
 
             ViewBag.project = project.Title;
-            ViewBag.subcode = subcode.name;
+            if(subcode != null){
+                ViewBag.subcode = subcode.name;
+            }
             return View( activity);
         }
 
