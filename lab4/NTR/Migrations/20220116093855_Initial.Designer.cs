@@ -6,17 +6,19 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NTR.Data;
 
+#nullable disable
+
 namespace NTR.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220115184855_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220116093855_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.10")
+                .HasAnnotation("ProductVersion", "6.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("NTR.Models.Activity", b =>
@@ -30,17 +32,17 @@ namespace NTR.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("Frozen")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("ProjectCode")
                         .IsRequired()
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(95)");
 
                     b.Property<string>("SubcodeName")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("Time")
                         .HasColumnType("int");
@@ -60,7 +62,7 @@ namespace NTR.Migrations
             modelBuilder.Entity("NTR.Models.Project", b =>
                 {
                     b.Property<string>("ProjectCode")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(95)");
 
                     b.Property<bool>("Active")
                         .HasColumnType("tinyint(1)");
@@ -70,7 +72,7 @@ namespace NTR.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -96,7 +98,7 @@ namespace NTR.Migrations
 
                     b.Property<string>("ProjectCode")
                         .IsRequired()
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(95)");
 
                     b.Property<bool>("Submitted")
                         .HasColumnType("tinyint(1)");
@@ -122,11 +124,11 @@ namespace NTR.Migrations
             modelBuilder.Entity("NTR.Models.Subcode", b =>
                 {
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(95)");
 
                     b.Property<string>("ProjectCode")
                         .IsRequired()
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(95)");
 
                     b.HasKey("Name");
 
@@ -143,7 +145,7 @@ namespace NTR.Migrations
 
                     b.Property<string>("First_Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.HasKey("UserId");
 
@@ -169,6 +171,12 @@ namespace NTR.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Project");
+
+                    b.Navigation("Subcode");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NTR.Models.Project", b =>
@@ -178,6 +186,8 @@ namespace NTR.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NTR.Models.ProjectPartake", b =>
@@ -193,6 +203,10 @@ namespace NTR.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Project");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NTR.Models.Subcode", b =>
@@ -202,6 +216,24 @@ namespace NTR.Migrations
                         .HasForeignKey("ProjectCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Projects");
+                });
+
+            modelBuilder.Entity("NTR.Models.Project", b =>
+                {
+                    b.Navigation("Activities");
+
+                    b.Navigation("Subcodes");
+                });
+
+            modelBuilder.Entity("NTR.Models.User", b =>
+                {
+                    b.Navigation("Activities");
+
+                    b.Navigation("ProjectPartakes");
+
+                    b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618
         }

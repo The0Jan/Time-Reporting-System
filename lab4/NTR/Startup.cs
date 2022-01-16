@@ -8,8 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NTR.Data;
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql;
+using NTR.Data;
 namespace NTR
 {
     public class Startup
@@ -24,7 +25,7 @@ namespace NTR
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options => options.UseMySQL(Configuration.GetConnectionString("Default")));
+            services.AddDbContext<DataContext>(options => options.UseMySql(Configuration.GetConnectionString("Default"), new MySqlServerVersion(new Version()) ));
             services.AddScoped<IDataContext>(provider=> provider.GetService<DataContext>());
             services.AddControllersWithViews();
         }

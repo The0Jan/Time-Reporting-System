@@ -28,7 +28,7 @@ namespace NTR.Models
         public User? User {get; set;}
         [ForeignKey(nameof(ProjectCode))]
         public Project? Project {get; set;}
-        [ForeignKey(nameof(ProjectCode))]
+        [ForeignKey(nameof(SubcodeName))]
         public Subcode? Subcode {get; set;}
 
     }

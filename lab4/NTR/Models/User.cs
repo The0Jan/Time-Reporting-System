@@ -16,7 +16,7 @@ namespace NTR.Models
 
         public string First_Name { get; set; } = "";
 
-        public ICollection<Project>? Projects { get; set; }
+        public ICollection<Project>? Projects { get; set; } 
         public ICollection<ProjectPartake>? ProjectPartakes { get; set; }
         public ICollection<Activity>? Activities { get; set; }
 
