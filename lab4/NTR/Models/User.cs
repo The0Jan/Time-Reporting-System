@@ -11,9 +11,8 @@ namespace NTR.Models
 {
     public class User
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int UserModelId { get; set; }
+
+        public int UserId { get; set; }
 
         public string First_Name { get; set; } = "";
 

@@ -12,13 +12,13 @@ namespace NTR.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserModelId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     First_Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserModelId);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,7 +38,7 @@ namespace NTR.Migrations
                         name: "FK_Projects_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserModelId",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -69,7 +69,7 @@ namespace NTR.Migrations
                         name: "FK_ProjectPartakes_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserModelId",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -124,7 +124,7 @@ namespace NTR.Migrations
                         name: "FK_Activities_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserModelId",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 

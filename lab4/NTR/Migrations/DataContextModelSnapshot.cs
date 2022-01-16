@@ -135,7 +135,7 @@ namespace NTR.Migrations
 
             modelBuilder.Entity("NTR.Models.User", b =>
                 {
-                    b.Property<int>("UserModelId")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -143,7 +143,7 @@ namespace NTR.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("UserModelId");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });

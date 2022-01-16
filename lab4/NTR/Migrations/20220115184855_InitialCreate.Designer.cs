@@ -9,7 +9,7 @@ using NTR.Data;
 namespace NTR.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220115135722_InitialCreate")]
+    [Migration("20220115184855_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -137,7 +137,7 @@ namespace NTR.Migrations
 
             modelBuilder.Entity("NTR.Models.User", b =>
                 {
-                    b.Property<int>("UserModelId")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -145,7 +145,7 @@ namespace NTR.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("UserModelId");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
