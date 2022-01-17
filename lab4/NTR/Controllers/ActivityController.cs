@@ -14,7 +14,7 @@ using NTR.Data;
 namespace NTR.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class ActivityController : ControllerBase
 {
     private  DataContext _context;

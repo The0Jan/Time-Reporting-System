@@ -14,7 +14,7 @@ using NTR.Data;
 namespace NTR.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class HomeController : ControllerBase
 {
 
@@ -38,7 +38,7 @@ public class HomeController : ControllerBase
         var user = _context.Users.FirstOrDefault(m => m.UserId == id);
         if(user == null)
             return NotFound(); /// Co to kurwa jest niby
-        var options = new CookieOptions { HttpOnly = true, Secure = false, MaxAge = TimeSpan.FromMinutes(60) };
+        var options = new CookieOptions { HttpOnly = false, Secure = true, MaxAge = TimeSpan.FromMinutes(60) };
         Response.Cookies.Append("user", user.First_Name, options);
         Response.Cookies.Append("id", user.UserId.ToString(), options);
 
@@ -48,8 +48,11 @@ public class HomeController : ControllerBase
     [HttpPost("logout")]
     public IActionResult LogOut()
     {
-        Response.Cookies.Delete("user");
-        Response.Cookies.Delete("id");
+
+        var options = new CookieOptions { HttpOnly = false, Secure = true, Expires = DateTime.Now.AddDays(-1) };
+        Response.Cookies.Delete("user", options);
+        Response.Cookies.Delete("id", options);
+        
         return Ok();
     }
 
