@@ -5,6 +5,8 @@ import './NavMenu.css';
 import Cookies from 'js-cookie';
 
 
+
+
 export  default function NavMenu() {
     const [name, setName] = useState("");
     useEffect(() => {
@@ -15,6 +17,7 @@ export  default function NavMenu() {
     function logoutUser(){
       console.log(document.cookie);
       fetch(`api/home/logout`, {method:'POST'});
+      setName("");
     }
 
    
@@ -35,6 +38,9 @@ export  default function NavMenu() {
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/login">Login</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} className="text-dark" to="/activities">Activities</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className="text-dark" onClick={logoutUser}>Logout</NavLink>

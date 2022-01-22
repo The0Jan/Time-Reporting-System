@@ -11,8 +11,6 @@ export  function Login() {
        .then((data) => setUsers(data));
     }, []);
 
-
-
     function loginUser(){
         fetch(`api/home/${name}/login`, {method:'POST'});
     }

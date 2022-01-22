@@ -28,6 +28,7 @@ namespace NTR
             services.AddDbContext<DataContext>(options => options.UseMySql(Configuration.GetConnectionString("Default"), new MySqlServerVersion(new Version()) ));
             services.AddScoped<IDataContext>(provider=> provider.GetService<DataContext>());
             services.AddControllersWithViews();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
