@@ -49,7 +49,7 @@ export default function ActivitiesCreate(props){
             })
         };
         fetch(`api/activity/create`, requestOptions)
-        .then(props.handleRefresh);
+        .then(props.handleRefresh(props.given_date));
         Clear();
     }
     return(
