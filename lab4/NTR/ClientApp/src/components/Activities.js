@@ -61,7 +61,7 @@ export  function Activities() {
                         <th>Project Subcode</th>
                         <th>Time</th>
                         <th>Description</th>
-                        <th>Delete/Edit</th>
+                        <th>Options</th>
                     </tr>
             </thead>
             <tbody>

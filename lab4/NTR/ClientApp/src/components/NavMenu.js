@@ -10,9 +10,13 @@ import Cookies from 'js-cookie';
 export  default function NavMenu() {
     const [name, setName] = useState("");
     useEffect(() => {
+      setName("")
+    }, []);
+
+    function reCookie(){
       var cookie = Cookies.get('user');
       setName(cookie);
-   }, []);
+    }
 
     function logoutUser(){
       console.log(document.cookie);
@@ -20,34 +24,35 @@ export  default function NavMenu() {
       setName("");
     }
 
-   
+    const loggedOut = (
+      <>
+        <NavItem>
+          <NavLink tag={Link} className="icon-bar" onClick={reCookie} to="/activities">Enter</NavLink>
+        </NavItem>
+      </>
+    );
+
+    const loggedIn = (
+      <>
+        <NavItem>
+          <NavLink tag={Link} className="text-dark" onClick={reCookie} to="/activities">Activities</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} className="text-dark" onClick={reCookie} to="/partakes">Project Partakings</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} className="text-dark" onClick={logoutUser} to="/">Leave</NavLink>
+        </NavItem>
+      </>
+    );
+
     return (
       <header>
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
           <Container>
-            <NavbarBrand tag={Link} to="/"> {name}</NavbarBrand>
+            <NavbarBrand > {name}</NavbarBrand>
               <ul className="navbar-nav flex-grow">
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/login">Login</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/activities">Activities</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/partakes">Project Partakings</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink className="text-dark" onClick={logoutUser}>Logout</NavLink>
-                </NavItem>
+                {name == "" ? loggedOut : loggedIn}
               </ul>
           </Container>
         </Navbar>

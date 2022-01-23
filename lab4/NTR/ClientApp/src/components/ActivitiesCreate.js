@@ -56,7 +56,7 @@ export default function ActivitiesCreate(props){
         <tr>
             <td>
                 <Form.Select value={projectName} onChange ={evt => SelectProject(evt.target.value)} required>
-                    <option value="" hidden>Wybierz projekt</option>)
+                    <option value="" hidden>Select project</option>)
 
                     {projects.map(project =>
                             <option key={project.projectCode} value={project.projectCode}>{project.title}</option>)
@@ -65,7 +65,7 @@ export default function ActivitiesCreate(props){
             </td>
             <td>
                 <Form.Select value={subcodeName} onChange ={evt => setSubcodeName(evt.target.value)} required>
-                    <option value="" hidden>Wybierz projekt</option>)
+                    <option value="" hidden>Select subcode</option>)
 
                     {subcodes.map(subcode =>
                             <option key={subcode.name} value={subcode.name}>{subcode.name}</option>)
@@ -78,8 +78,7 @@ export default function ActivitiesCreate(props){
             <td>
                 <Form.Control as="textarea" value={description}  onChange={evt => setDesc(evt.target.value)} />  
             </td>
-            <td>
-            </td>
+
             <td>
                 <Button variant="success" onClick={() => Create()}>Create</Button>
                 <Button variant="info" onClick={() => Clear}>Clear</Button>
