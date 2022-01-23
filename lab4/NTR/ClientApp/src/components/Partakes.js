@@ -1,5 +1,5 @@
-import React, {useEffect, useState } from 'react';
-import {Form, Button, Table } from 'react-bootstrap';
+import React, {useEffect, useState} from 'react';
+import {Form, Table} from 'react-bootstrap';
 
 export default function Partakes(){
     const [projects, setProject] = useState([]);

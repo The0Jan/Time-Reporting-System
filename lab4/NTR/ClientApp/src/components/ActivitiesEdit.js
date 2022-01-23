@@ -11,7 +11,6 @@ export default function  ActivitiesEdit(props){
 
     const [subcodes, setSubcodes] = useState([]);
 
-
     useEffect(() => {
         fetch(`api/activity/activity/${props.activityId}`)
         .then((response) => response.json())
@@ -23,9 +22,9 @@ export default function  ActivitiesEdit(props){
         fetch(`api/activity/subcodes/${data.projectCode}`)
         .then((response) => response.json())
         .then((get_sub) => setSubcodes(get_sub))]);
-     }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    
     function Update(){
         const requestOptions = {
             method: 'POST',
@@ -41,8 +40,7 @@ export default function  ActivitiesEdit(props){
         .then(props.handleClose);
     }
 
-
-  return (
+    return (
     <div className="popup-box">
     <div className="box">
         <span className="close-icon" onClick={props.handleClose}>x</span>
@@ -64,9 +62,8 @@ export default function  ActivitiesEdit(props){
             <td>
                 <Form.Select value={subcodeName} onChange ={evt => setSubcode(evt.target.value)} required>
                     <option value={subcodeName} defaultValue={subcodeName}>{subcodeName}</option>)
-
                     {subcodes.map(subcode_m =>
-                            <option key={subcode_m.name} value={subcode_m.name}>{subcode_m.name}</option>)
+                        <option key={subcode_m.name} value={subcode_m.name}>{subcode_m.name}</option>)
                     }                
                 </Form.Select>            
             </td>
@@ -85,5 +82,5 @@ export default function  ActivitiesEdit(props){
     </div>
     </div>
   );
-};
+}
  

@@ -1,5 +1,5 @@
-import React, {useEffect, useState } from 'react';
-import {Form, Button, Table } from 'react-bootstrap';
+import React, {useState} from 'react';
+import {Button, Table } from 'react-bootstrap';
 import ActivitiesCreate  from './ActivitiesCreate';
 import ActivitiesEdit  from './ActivitiesEdit';
 

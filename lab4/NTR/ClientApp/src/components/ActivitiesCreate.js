@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from 'react';
-import {Form, Button, Table } from 'react-bootstrap';
+import {Form, Button} from 'react-bootstrap';
 
 
 
@@ -16,8 +16,7 @@ export default function ActivitiesCreate(props){
         fetch('api/activity/projects')
         .then((response) => response.json())
         .then((data) => setProject(data));
-     }, []);
-
+    }, []);
 
     function SelectProject(project_code){
         fetch(`api/activity/subcodes/${project_code}`)
