@@ -43,6 +43,9 @@ export  default function NavMenu() {
                   <NavLink tag={Link} className="text-dark" to="/activities">Activities</NavLink>
                 </NavItem>
                 <NavItem>
+                  <NavLink tag={Link} className="text-dark" to="/partakes">Project Partakings</NavLink>
+                </NavItem>
+                <NavItem>
                   <NavLink className="text-dark" onClick={logoutUser}>Logout</NavLink>
                 </NavItem>
               </ul>
