@@ -11,7 +11,6 @@ using System.Globalization;
 using NTR.Models;
 using NTR.Data;
 using NTR.Models.RestModels;
-using NTR.Models;
 using AutoMapper;
 namespace NTR.Controllers;
 
