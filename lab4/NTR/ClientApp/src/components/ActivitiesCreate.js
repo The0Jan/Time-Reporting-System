@@ -3,7 +3,7 @@ import {Form, Button, Table } from 'react-bootstrap';
 
 
 
-export default function ActivitiesCreate({given_date}){
+export default function ActivitiesCreate(props){
     const [projects, setProject] = useState([]);
     const [subcodes, setSubcode] = useState([]);
 
@@ -34,13 +34,12 @@ export default function ActivitiesCreate({given_date}){
     }
 
     function Create(){
-
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 ActivityId: null,
-                Date:given_date,
+                Date:props.given_date,
                 Time: time,
                 Description: description,
                 Frozen: false,
@@ -49,7 +48,8 @@ export default function ActivitiesCreate({given_date}){
                 SubcodeName: subcodeName
             })
         };
-        fetch(`api/activity/create`, requestOptions);
+        fetch(`api/activity/create`, requestOptions)
+        .then(props.handleRefresh);
         Clear();
     }
     return(
@@ -82,8 +82,8 @@ export default function ActivitiesCreate({given_date}){
             <td>
             </td>
             <td>
-                <Button variant="success" onClick={Create}>Create</Button>
-                <Button variant="info" onClick={Clear}>Clear</Button>
+                <Button variant="success" onClick={() => Create()}>Create</Button>
+                <Button variant="info" onClick={() => Clear}>Clear</Button>
             </td>
         </tr>
         </>

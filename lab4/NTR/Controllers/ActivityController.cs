@@ -20,7 +20,7 @@ namespace NTR.Controllers;
 public class ActivityController : ControllerBase
 {
     private  DataContext _context;
-    private  readonly IMapper _mapper;
+    private  IMapper _mapper;
 
     public ActivityController(DataContext context,IMapper mapper)
     {
@@ -33,7 +33,6 @@ public class ActivityController : ControllerBase
     {
        /// DateTime current_date = DateTime(date);
         int UserID = Convert.ToInt32(Request.Cookies["id"]);
-        Console.Write(UserID);
         var activities = _context.Activities.Where(m => m.UserId == UserID 
                 && m.Date == date);
 
@@ -44,15 +43,6 @@ public class ActivityController : ControllerBase
     public IActionResult Create( [FromBody] AcceptedActivity activity)
     {
         var new_activity = _mapper.Map<NTR.Models.Activity>(activity);
-        Console.Write(new_activity.ActivityId);
-        Console.Write(new_activity.Date);
-        Console.Write(new_activity.Time);
-        Console.Write(new_activity.Description);
-        Console.Write(new_activity.Frozen);
-        Console.Write(new_activity.UserId);
-        Console.Write(new_activity.ProjectCode);
-        Console.Write(new_activity.SubcodeName);
-
         new_activity.UserId = Convert.ToInt32(Request.Cookies["id"]);
         _context.Activities.Add(new_activity);
         _context.SaveChanges();
@@ -61,14 +51,34 @@ public class ActivityController : ControllerBase
     }
 
     [HttpPost("delete/{id}")]
-    public IActionResult Delete(int id)
+    public IActionResult delete(int id)
     {
         var to_delete = _context.Activities.FirstOrDefault(m => m.ActivityId == id);
         _context.Activities.Remove(to_delete);
         _context.SaveChanges();
         return Ok();
     }
-    
+
+    [HttpGet("activity/{id}")]
+    public IActionResult getActivity(int id)
+    {
+        var activity = _context.Activities.FirstOrDefault(m => m.ActivityId == id);
+        return Ok(activity);
+    }
+
+    [HttpPost("update")]
+    public IActionResult update( [FromBody] UpdatedActivity activity)
+    {
+
+        var to_update =_context.Activities.FirstOrDefault(m => m.ActivityId == activity.ActivityId);
+        to_update.Description = activity.Description;
+        to_update.Time = Convert.ToInt32(activity.Time);
+        to_update.SubcodeName = activity.SubcodeName;
+        _context.SaveChanges();
+
+        return Ok();
+    }
+
     [HttpGet("projects")]
     public IActionResult getProjects()
     {

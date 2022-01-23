@@ -1,13 +1,16 @@
 import React, {useEffect, useState } from 'react';
 import {Form, Button, Table } from 'react-bootstrap';
 import ActivitiesCreate  from './ActivitiesCreate';
+import ActivitiesEdit  from './ActivitiesEdit';
 
 export  function Activities() {
     const [activities, setActivities] = useState([]);
     const [cur_date, setDate] = useState('')
+    const [cur_activity, setActive] = useState(0)
+
+    const [isOpen, setIsOpen] = useState(false);
 
     function getActivities(date){
-        console.log(date);
         fetch(`api/activity/${date}`)
         .then((response) => response.json())
         .then((data) => setActivities(data));
@@ -15,17 +18,27 @@ export  function Activities() {
         setDate(date);
     }
 
+    function refresh(){
+        fetch(`api/activity/${cur_date}`)
+        .then((response) => response.json())
+        .then((data) => setActivities(data));
+    }
+
     function remove(activityId){
         fetch(`api/activity/delete/${activityId}`, {method:'POST'})
-
-        getActivities(cur_date);
+        .then(() => refresh());
     }
 
-
-    function update(activityId){
-        console.log(activityId);
-        
+    const togglePopup = (activity) => {
+        setActive(activity.activityId);
+        setIsOpen(!isOpen);
     }
+
+    const togglePopoff = () => {
+        setIsOpen(!isOpen);
+        refresh();
+    }
+
 
     return (
         <>
@@ -54,15 +67,15 @@ export  function Activities() {
                 <td>{activity.description}</td>
                 <td>
                     <Button onClick={() => remove(activity.activityId)} variant="danger">Delete</Button>
-                    
-                    <Button onClick={() => update(activity.activityId)} variant="warning">Edit</Button>
+                    <Button onClick={() => togglePopup(activity)} variant="warning">Edit</Button>
+                    {isOpen && <ActivitiesEdit activityId={cur_activity} handleClose={togglePopoff}/>}
                 </td>
             </tr>
             )}
-            <ActivitiesCreate given_date = {cur_date} />
-
+            <ActivitiesCreate given_date = {cur_date} handleRefresh = {refresh}/>
             </tbody>
         </Table>
+
     </>
     );
     

@@ -10,5 +10,7 @@ public class ModelProfile : Profile
     public ModelProfile()
     {
         CreateMap<AcceptedActivity, Activity>();
+        CreateMap<UpdatedActivity, Activity>();
+
     }
 }
