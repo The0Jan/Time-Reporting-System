@@ -1,26 +1,39 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using NTR.Data;
+using Microsoft.EntityFrameworkCore;
+using NTR;
+using System.ComponentModel.DataAnnotations;
+using Pomelo.EntityFrameworkCore.MySql;
 
-namespace NTR
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllersWithViews();
+string connString = builder.Configuration.GetConnectionString("Docker");
+builder.Services.AddDbContext<DataContext>(options =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+    options.UseMySql(builder.Configuration.GetConnectionString("Docker"), new MySqlServerVersion(new Version()) );
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+});
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+app.MapFallbackToFile("index.html");;
+
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller}/{action=Index}/{id?}");
+
+
+app.Run();

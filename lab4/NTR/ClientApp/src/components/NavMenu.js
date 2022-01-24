@@ -52,7 +52,7 @@ export  default function NavMenu() {
           <Container>
             <NavbarBrand > {name}</NavbarBrand>
               <ul className="navbar-nav flex-grow">
-                {name == "" ? loggedOut : loggedIn}
+                {name === "" ? loggedOut : loggedIn}
               </ul>
           </Container>
         </Navbar>
