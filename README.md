@@ -1,6 +1,14 @@
 # NTR21Z-Walczak-Jan
 
 ## Urachamianie 
+
+### Bazy danyc
+```
+docker-compose up
+dotnet ef database update
+```
+
+
 ### Development (serwer i klient na osobnych portach)
 
 ```bash
