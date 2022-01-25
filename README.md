@@ -2,7 +2,7 @@
 
 ## Urachamianie 
 
-### Bazy danyc
+### Bazy danych
 ```
 docker-compose up
 dotnet ef database update
