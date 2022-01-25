@@ -31,6 +31,8 @@ app.UseRouting();
 app.MapFallbackToFile("index.html");;
 
 
+
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
