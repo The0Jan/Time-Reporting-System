@@ -37,7 +37,7 @@ public class HomeController : ControllerBase
     {
         var user = _context.Users.FirstOrDefault(m => m.UserId == id);
         if(user == null)
-            return NotFound(); /// Co to kurwa jest niby
+            return NotFound();
         var options = new CookieOptions { HttpOnly = false, Secure = true, MaxAge = TimeSpan.FromMinutes(60) };
         Response.Cookies.Append("user", user.First_Name, options);
         Response.Cookies.Append("id", user.UserId.ToString(), options);

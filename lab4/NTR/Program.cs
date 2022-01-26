@@ -9,10 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-string connString = builder.Configuration.GetConnectionString("Docker");
+string connString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseMySql(builder.Configuration.GetConnectionString("Docker"), new MySqlServerVersion(new Version()) );
+    options.UseMySql(builder.Configuration.GetConnectionString("Default"), new MySqlServerVersion(new Version()) );
 
 });
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
