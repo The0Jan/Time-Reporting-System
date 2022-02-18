@@ -26,7 +26,7 @@ Menu Dialog
  - Project owner sees project budget remaining after subtracting accepted time (budget can be negative ...)
  - The user can see the time that has been accepted by the project owners
 
-## Lab 2 - .net MVC with database, migrations and concurency
+## Lab 2 - .net MVC with database, migrations and concurency checking
 Same functionalities as lab 1 but using a database and with concurency
 
 ## Lab 4 - .net + React with database
