@@ -1,7 +1,7 @@
 # RTS
 
 
-## Lab 1 - .net MVC without database (using JSON to stroe data)
+## Lab 1 - .net MVC without database (using JSON to store data)
 Main screen:
 
  - Displays the activities of the active (or any other) day. Counts the reported time
